@@ -1,0 +1,100 @@
+# ChainLancer overlay — ports chosen to avoid conflict with ChainLancer (:3000)
+# Run: docker compose -f docker-compose.oss.yml up --build
+# From project root after: npm run setup:oss
+
+services:
+  chainlancer-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: chainlancer
+      POSTGRES_PASSWORD: chainlancer
+      POSTGRES_DB: chainlancer
+    ports:
+      - "5433:5432"
+    volumes:
+      - chainlancer_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chainlancer -d chainlancer"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  kyc-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: kyc
+      POSTGRES_PASSWORD: kyc
+      POSTGRES_DB: kyc
+    volumes:
+      - kyc_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kyc -d kyc"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  kyc-redis:
+    image: redis:7
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  kyc-api:
+    build:
+      context: ./services/simple-kyc-oss
+    environment:
+      KYC_DATABASE_URL: postgresql+psycopg://kyc:kyc@kyc-db:5432/kyc
+      KYC_REDIS_URL: redis://kyc-redis:6379
+      KYC_TASK_QUEUE: arq
+      KYC_LOG_FORMAT: console
+      KYC_PII_SALT: chainlancer-dev-pii-salt
+      KYC_P2P_API_KEYS: chainlancer-dev-kyc-key
+      KYC_TENANT_API_KEYS: chainlancer:chainlancer-dev-kyc-key
+      KYC_ADMIN_API_KEYS: chainlancer-admin-key
+      KYC_CORS_ORIGINS: http://localhost:3000,http://localhost:8081
+      KYC_WIDGET_BASE_URL: http://localhost:8081
+    ports:
+      - "8080:8000"
+    depends_on:
+      kyc-db:
+        condition: service_healthy
+      kyc-redis:
+        condition: service_healthy
+
+  kyc-worker:
+    build:
+      context: ./services/simple-kyc-oss
+    command: ["arq", "app.worker.WorkerSettings"]
+    environment:
+      KYC_DATABASE_URL: postgresql+psycopg://kyc:kyc@kyc-db:5432/kyc
+      KYC_REDIS_URL: redis://kyc-redis:6379
+      KYC_LOG_FORMAT: console
+      KYC_PII_SALT: chainlancer-dev-pii-salt
+    depends_on:
+      kyc-db:
+        condition: service_healthy
+      kyc-redis:
+        condition: service_healthy
+
+  kyc-web:
+    build:
+      context: ./services/simple-kyc-oss/web
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8080
+    ports:
+      - "8081:3000"
+    depends_on:
+      - kyc-api
+
+  yente:
+    image: ghcr.io/opensanctions/yente:latest
+    ports:
+      - "8001:8000"
+    environment:
+      YENTE_AUTO_REINDEX: "true"
+
+volumes:
+  chainlancer_pgdata:
+  kyc_pgdata:

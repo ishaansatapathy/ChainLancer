@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── User ────────────────────────────────────────────────────────────
+model User {
+  id                   String    @id @default(uuid())
+  email                String    @unique
+  fullName             String    @default("")
+  profileImageUrl      String?
+  emailVerified        Boolean   @default(false)
+  authProvider         String    @default("local") // "local" | "google"
+  providerId           String?
+  passwordHash         String?
+  tokenVersion         String    @default("0")
+
+  // Role & Country
+  role                 String?   // "client" | "freelancer" | "arbitrator" | "admin"
+  country              String?   // ISO 3166-1 alpha-2
+
+  // Wallet
+  walletAddress        String?
+  walletChainId        String?
+  walletVerified       Boolean   @default(false)
+  walletVerifiedAt     DateTime?
+  walletNonce          String?
+  walletNonceExpiresAt DateTime?
+  walletPendingAddress String?
+
+  // KYC
+  kycStatus            String    @default("NOT_STARTED")
+  kycProvider          String?
+  kycVerificationId    String?
+  kycVerifiedAt        DateTime?
+
+  // AML
+  amlStatus            String    @default("NOT_SCREENED")
+  amlRiskLevel         String?
+  amlProvider          String?
+  amlScreeningId       String?
+  amlScreenedAt        DateTime?
+  amlMatchedEntities   Json      @default("[]")
+
+  // Compliance
+  complianceStatus     String    @default("PENDING")
+  complianceReason     String?
+  complianceCheckedAt  DateTime?
+
+  // Relations
+  profile              Profile?
+  clientContracts      Contract[] @relation("ClientContracts")
+  freelancerContracts  Contract[] @relation("FreelancerContracts")
+  auditLogs            AuditLog[]
+
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@map("users")
+}
+
+// ─── Profile ─────────────────────────────────────────────────────────
+model Profile {
+  id                          String  @id @default(uuid())
+  userId                      String  @unique
+  user                        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  headline                    String  @default("")
+  about                       String  @default("")
+  skills                      Json    @default("[]") // string[]
+  experience                  String  @default("")
+  portfolio                   String  @default("")
+  hourlyRate                  String  @default("")
+  availability                String  @default("Available for work")
+  preferredContractType       String  @default("Milestone-based")
+  preferredMilestoneStructure String  @default("Fixed deliverables")
+  settlementAsset             String  @default("USDC")
+  settlementNetwork           String  @default("Polygon")
+  preferredFiat               String  @default("INR")
+  preferredPayoutMethod       String  @default("Wallet")
+  profileComplete             Boolean @default(false)
+
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+// ─── Contract ────────────────────────────────────────────────────────
+model Contract {
+  id               String      @id @default(uuid())
+  clientId         String
+  client           User        @relation("ClientContracts", fields: [clientId], references: [id])
+  freelancerId     String?
+  freelancer       User?       @relation("FreelancerContracts", fields: [freelancerId], references: [id])
+
+  counterpartyName String      @default("")
+  title            String      @default("")
+  description      String      @default("")
+  totalAmount      Float       @default(0)
+  asset            String      @default("USDC")
+  network          String      @default("Polygon")
+  status           String      @default("DRAFT")
+
+  escrowAddress    String?
+  fundedAt         DateTime?
+  fundTxHash       String?
+  releasedAmount   Float?
+  settlement       Json?       // settlement details object
+
+  milestones       Milestone[]
+
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@map("contracts")
+}
+
+// ─── Milestone ───────────────────────────────────────────────────────
+model Milestone {
+  id             String    @id @default(uuid())
+  contractId     String
+  contract       Contract  @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  title          String    @default("")
+  description    String    @default("")
+  amount         Float     @default(0)
+  dueDate        DateTime?
+  requirements   String    @default("")
+  status         String    @default("PENDING")
+
+  deliverable    Json?     // { githubUrl, figmaUrl, fileRef, description, evidenceHash }
+  submittedAt    DateTime?
+  approvedAt     DateTime?
+  disputeReason  String?
+  releasedAmount Float?
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@map("milestones")
+}
+
+// ─── Audit Log ───────────────────────────────────────────────────────
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  metadata  Json     @default("{}")
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("audit_logs")
+}

@@ -36,7 +36,27 @@ async function logout() {
 }
 
 function openAuthPage() {
-  window.location.href = '/auth.html';
+  window.location.href = '/auth';
+}
+
+function wireConnectWalletButton() {
+  const connectWallet = document.getElementById('connect-wallet-btn');
+  if (!connectWallet || connectWallet.dataset.wired) return;
+  connectWallet.dataset.wired = '1';
+  connectWallet.addEventListener('click', async (event) => {
+    event.preventDefault();
+    try {
+      const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+      if (!res.ok) {
+        window.location.href = '/auth?return=/wallet';
+        return;
+      }
+    } catch {
+      window.location.href = '/auth?return=/wallet';
+      return;
+    }
+    window.location.href = '/wallet';
+  });
 }
 
 function wireGuestButtons() {
@@ -52,6 +72,8 @@ function wireGuestButtons() {
       openAuthPage();
     });
   });
+
+  wireConnectWalletButton();
 }
 
 function paintSignedIn(user) {
@@ -63,6 +85,7 @@ function paintSignedIn(user) {
       logout();
     });
   }
+  wireConnectWalletButton();
 }
 
 export async function initAuth() {

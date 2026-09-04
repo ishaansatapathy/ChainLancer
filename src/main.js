@@ -3,11 +3,7 @@
  * Initializes all modules on DOM ready
  */
 
-import './styles/variables.css';
-import './styles/base.css';
-import './styles/components.css';
-import './styles/sections.css';
-import './styles/animations.css';
+import './styles/main-pages.css';
 
 import { initGlobe } from './globe.js';
 import { initScrollAnimations } from './scroll-animations.js';

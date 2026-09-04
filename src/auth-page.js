@@ -1,7 +1,4 @@
-import './styles/variables.css';
-import './styles/base.css';
-import './styles/components.css';
-import './styles/auth.css';
+import './styles/auth-pages.css';
 
 const form = document.getElementById('auth-form');
 const title = document.getElementById('auth-title');
@@ -81,7 +78,7 @@ form.addEventListener('submit', async (event) => {
     });
     const payload = await res.json();
     if (!res.ok) throw new Error(payload.error || 'Authentication failed');
-    window.location.href = '/';
+    window.location.href = '/onboarding.html';
   } catch (error) {
     showError(error.message);
     submitBtn.disabled = false;
@@ -93,7 +90,14 @@ setMode('signin');
 paintQueryError();
 
 fetchMe()
-  .then((user) => {
-    if (user) window.location.replace('/');
+  .then(async (user) => {
+    if (!user) return;
+    try {
+      const res = await fetch('/api/onboarding/status', { credentials: 'same-origin' });
+      const data = res.ok ? await res.json() : null;
+      window.location.replace(data?.nextStep === 'complete' ? '/' : '/onboarding.html');
+    } catch {
+      window.location.replace('/onboarding.html');
+    }
   })
   .catch(() => {});

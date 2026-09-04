@@ -328,3 +328,97 @@
     padding: 24px;
   }
 }
+
+.auth-select {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.onboarding-inner {
+  max-width: 380px;
+}
+
+.onboarding-step:not([hidden]) {
+  display: grid;
+  gap: 12px;
+}
+
+.onboarding-step[hidden] {
+  display: none !important;
+}
+
+.role-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.role-card {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.role-card:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.status-pill {
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #141414;
+}
+
+.status-pill span {
+  display: block;
+  font-size: 10px;
+  color: #737373;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status-pill strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #fafaf9;
+}
+
+.wallet-inner {
+  max-width: 400px;
+}
+
+.wallet-grid {
+  margin-bottom: 14px;
+}
+
+.wallet-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.wallet-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 40px;
+}

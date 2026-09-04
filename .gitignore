@@ -14,6 +14,10 @@ dist-ssr
 .env
 server/data
 
+# Cloned OSS services (run npm run setup:oss to fetch)
+services/simple-kyc-oss/
+services/yente/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
