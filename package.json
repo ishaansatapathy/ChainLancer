@@ -6,16 +6,47 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test server/tests/*.test.js",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:migrate": "prisma migrate dev",
+    "setup:oss": "powershell -ExecutionPolicy Bypass -File scripts/setup-oss.ps1",
+    "oss:up": "docker compose -f docker-compose.oss.yml up --build",
+    "oss:init": "node scripts/oss-init.mjs"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "prisma": "^6.9.0",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3",
     "vite": "^8.2.2"
   },
   "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "@tanstack/react-query": "^5.102.8",
+    "@trpc/client": "^11.18.0",
+    "@trpc/react-query": "^11.18.0",
+    "@trpc/server": "^11.18.0",
     "cobe": "^2.0.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.2",
+    "express": "^5.2.1",
     "google-auth-library": "^10.5.0",
     "jsonwebtoken": "^9.0.2",
-    "three": "^0.185.1"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3",
+    "superjson": "^2.2.6",
+    "three": "^0.185.1",
+    "viem": "^2.56.3",
+    "zod": "^4.5.4"
   }
 }
