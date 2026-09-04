@@ -21,7 +21,7 @@ export default function MilestoneReviewPage() {
 
   if (loading) return null;
   if (!contract) return error ? <div className="app-error">{error}</div> : null;
-  if (!contract.isClient) return <div className="app-error">Only the client can review milestone submissions.</div>;
+  if (!contract.isClient && !contract.isFreelancer) return <div className="app-error">Only contract parties can review milestone submissions.</div>;
 
   const ms = contract.milestones.find((m) => m.id === milestoneId);
   if (!ms) return <div className="app-empty">Milestone not found.</div>;

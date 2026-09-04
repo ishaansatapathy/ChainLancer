@@ -62,19 +62,24 @@ export default function ContractPage() {
 
   function milestoneAction(ms) {
     const base = `/contracts/${contract.id}/milestones/${ms.id}`;
-    if (contract.isClient && ms.status === 'SUBMITTED') {
-      return <Link to={`${base}/review`} className="app-btn app-btn--primary">Review Submission</Link>;
+    if (ms.status === 'SUBMITTED') {
+      return (
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <Link to={`${base}/review`} className="app-btn app-btn--primary">Review Submission (Qship AI)</Link>
+          <Link to={base} className="app-btn app-btn--ghost">View Deliverable</Link>
+        </div>
+      );
     }
-    if (contract.isClient && contract.status === 'COMPLIANCE') {
-      return <Link to={`/contracts/${contract.id}/fund`} className="app-btn app-btn--ghost">Fund Escrow</Link>;
+    if (ms.status === 'APPROVED') {
+      return <Link to={`${base}/settlement`} className="app-btn app-btn--gold">Optimize Settlement →</Link>;
     }
-    if (contract.isFreelancer && ['PENDING', 'IN_PROGRESS'].includes(ms.status) && contract.status === 'IN_PROGRESS') {
+    if (['PENDING', 'IN_PROGRESS'].includes(ms.status) && contract.status === 'IN_PROGRESS') {
       return <Link to={base} className="app-btn app-btn--primary">Submit Deliverable</Link>;
     }
-    if (ms.status === 'APPROVED' && contract.isFreelancer) {
-      return <Link to={`${base}/settlement`} className="app-btn app-btn--gold">Optimize Settlement</Link>;
+    if (contract.status === 'COMPLIANCE') {
+      return <Link to={`/contracts/${contract.id}/fund`} className="app-btn app-btn--primary">Fund Escrow</Link>;
     }
-    return <Link to={base} className="app-btn app-btn--ghost">View Requirements</Link>;
+    return <Link to={base} className="app-btn app-btn--ghost">View Milestone</Link>;
   }
 
   return (

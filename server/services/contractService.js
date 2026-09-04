@@ -217,7 +217,7 @@ export async function validateMilestone(contractId, milestoneId, user) {
 
 export async function reviewMilestone(contractId, milestoneId, user, { action, reason }) {
   const c = await getContractForUser(contractId, user);
-  if (c.clientId !== user.id) throw new ApiError(403, 'Only client can review');
+  if (c.clientId !== user.id && c.freelancerId !== user.id) throw new ApiError(403, 'Only contract parties can review');
   const ms = c.milestones.find((m) => m.id === milestoneId);
   if (!ms) throw new ApiError(404, 'Milestone not found');
   if (ms.status !== 'SUBMITTED') throw new ApiError(400, 'Milestone not submitted');
