@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO -->
+  <title>ChainLancer — Smart Escrows & Milestone Settlement for Global Builders</title>
+  <meta name="description" content="Blockchain + AI powered escrow, milestone tracking, and settlement optimization for cross-border freelance work. Built on Polygon with USDC." />
+  <meta name="keywords" content="ChainLancer, blockchain, escrow, freelancer payments, USDC, smart contracts, AI evidence analysis, milestone tracking, cross-border payments" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ChainLancer — Smart Escrows & Milestone Settlement" />
+  <meta property="og:description" content="Turn agreements into programmable milestones. Lock USDC in escrow. Verify with AI. Settle globally." />
+  <meta property="og:type" content="website" />
+  
+  <!-- Fonts (Exact from ishaandev.co.in) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/logo.png" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <img src="/logo.png" alt="ChainLancer" class="nav__logo-img" />
+        <span class="nav__logo-text">ChainLancer</span>
+      </a>
+      
+      <div class="nav__links" id="nav-links">
+        <a href="#hero" class="nav__link">Overview</a>
+        <a href="#deep-dive" class="nav__link">Product Deep Dive</a>
+      </div>
+      
+      <div class="nav__actions">
+        <button class="btn btn-secondary" id="connect-wallet-btn" style="font-size: var(--fs-xs); padding: var(--space-2) var(--space-4);">Connect Wallet</button>
+        <button class="btn btn-primary" id="get-started-btn" style="font-size: var(--fs-xs); padding: var(--space-2) var(--space-4);">Get Started</button>
+        <button class="nav__mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════ -->
+  <section class="hero edge-glow" id="hero">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Polygon Mainnet Protocol</span>
+        </div>
+        
+        <h1 class="hero__heading">
+          Smart escrows for <em>global builders.</em>
+        </h1>
+        
+        <p class="hero__subheading">
+          Automated milestone verification, non-custodial USDC contracts, and transparent cross-border execution on Polygon.
+        </p>
+        
+        <div class="hero__ctas">
+          <button class="btn btn-primary" id="launch-app-btn">
+            Launch App <span class="arrow">→</span>
+          </button>
+          <button class="btn btn-secondary" id="view-demo-btn">
+            Documentation <span class="arrow">↗</span>
+          </button>
+        </div>
+        
+        <div class="hero__specs">
+          <div class="hero__spec-item">
+            <span class="hero__spec-label">Network</span>
+            <span class="hero__spec-val">Polygon PoS</span>
+          </div>
+          <div class="hero__spec-divider"></div>
+          <div class="hero__spec-item">
+            <span class="hero__spec-label">Settlement</span>
+            <span class="hero__spec-val">Native USDC</span>
+          </div>
+          <div class="hero__spec-divider"></div>
+          <div class="hero__spec-item">
+            <span class="hero__spec-label">Custody</span>
+            <span class="hero__spec-val">Non-Custodial</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero__globe" id="hero-globe">
+        <div id="globe-container" class="hero__globe-canvas"></div>
+        <div class="hero__globe-legend">
+          <div class="hero__globe-legend-item">
+            <span class="legend-ring"></span> Settlement corridors
+          </div>
+          <div class="hero__globe-legend-item">
+            <span class="legend-dot"></span> Builder & freelancer hubs
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       THREAD-INSPIRED ARCHITECTURAL SECTIONS
+       Command Center, Protocol Marquee, Bento Capabilities
+       ═══════════════════════════════════════════ -->
+  <div class="nh-shell">
+    <div class="nh-frame">
+      <div class="nh-grid-bg"></div>
+
+      <!-- Section: Interactive Command Center & App Window -->
+      <section class="nh-section" id="command-center">
+        <div class="nh-command-header reveal">
+          <span class="section-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            Command Center
+          </span>
+          <h2 class="heading-lg">
+            Execute escrows at the <em>speed of code.</em>
+          </h2>
+          <p class="nh-header-desc">
+            ChainLancer is your command center for on-chain milestones — inspect active vaults, audit cryptographic proofs, and release funds only when verified.
+          </p>
+        </div>
+
+        <!-- App Mockup Window Frame -->
+        <div class="nh-preview-window reveal">
+          <!-- Chrome Bar -->
+          <div class="nh-preview-chrome">
+            <div class="nh-chrome-dots">
+              <div class="nh-dot nh-dot--red"></div>
+              <div class="nh-dot nh-dot--yellow"></div>
+              <div class="nh-dot nh-dot--green"></div>
+            </div>
+            <div class="nh-chrome-address">
+              <span class="nh-chrome-address-dot"></span>
+              <span id="nh-preview-path">• /vaults</span>
+            </div>
+          </div>
+
+          <!-- Preview Body / State Views -->
+          <div class="nh-preview-body" id="nh-preview-body">
+            <!-- State 1: /vaults -->
+            <div class="nh-state-view active" data-state="vaults">
+              <div class="nh-vaults-layout">
+                <div class="nh-vaults-sidebar">
+                  <div class="nh-vaults-brand">
+                    <div class="nh-vaults-brand-icon" style="padding: 2px;">
+                      <img src="/logo.png" alt="" style="width: 16px; height: 16px; object-fit: contain;" />
+                    </div>
+                    <span class="nh-vaults-brand-name">ChainLancer</span>
+                  </div>
+
+                  <span class="nh-vaults-list-label">Active Escrows</span>
+
+                  <div class="nh-vault-item active">
+                    <div class="nh-vault-item-header">
+                      <span class="nh-vault-item-id">Vault #CL-8821</span>
+                      <span class="nh-vault-item-badge">Active</span>
+                    </div>
+                    <span class="nh-vault-item-amount">$12,500.00 USDC • 2/4 Done</span>
+                  </div>
+
+                  <div class="nh-vault-item">
+                    <div class="nh-vault-item-header">
+                      <span class="nh-vault-item-id">Vault #CL-7492</span>
+                      <span class="nh-vault-item-badge" style="background:rgba(96,165,250,0.12);color:#60a5fa;border-color:rgba(96,165,250,0.25);">Settled</span>
+                    </div>
+                    <span class="nh-vault-item-amount">$8,000.00 USDC • 4/4 Paid</span>
+                  </div>
+
+                  <div class="nh-vault-item">
+                    <div class="nh-vault-item-header">
+                      <span class="nh-vault-item-id">Vault #CL-9104</span>
+                      <span class="nh-vault-item-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.25);">Review</span>
+                    </div>
+                    <span class="nh-vault-item-amount">$15,200.00 USDC • 1/3 Done</span>
+                  </div>
+                </div>
+
+                <div class="nh-vaults-main">
+                  <div class="nh-vault-header-row">
+                    <div class="nh-vault-title-wrap">
+                      <h3>Non-Custodial Multi-Sig Vault #CL-8821</h3>
+                      <p>Polygon Mainnet • Smart Contract 0x71C...a4F9 • Mutual consensus lock</p>
+                    </div>
+                    <div class="nh-vault-status-pill">
+                      <span>●</span> Consensus Satisfied
+                    </div>
+                  </div>
+
+                  <div class="nh-vault-stats-grid">
+                    <div class="nh-vault-stat-box">
+                      <div class="nh-vault-stat-label">Locked Collateral</div>
+                      <div class="nh-vault-stat-value">$12,500.00</div>
+                      <div class="nh-vault-stat-sub">Native USDC (Circle)</div>
+                    </div>
+                    <div class="nh-vault-stat-box">
+                      <div class="nh-vault-stat-label">Next Milestone</div>
+                      <div class="nh-vault-stat-value">$3,500.00</div>
+                      <div class="nh-vault-stat-sub">Tranche 2: Smart Contract Suite</div>
+                    </div>
+                    <div class="nh-vault-stat-box">
+                      <div class="nh-vault-stat-label">Multi-Sig State</div>
+                      <div class="nh-vault-stat-value" style="color:var(--color-accent);">2 of 3</div>
+                      <div class="nh-vault-stat-sub">Signatures verified on-chain</div>
+                    </div>
+                  </div>
+
+                  <div class="nh-vault-action-card">
+                    <div class="nh-vault-action-text">
+                      <strong>Milestone 2 deliverable verified.</strong> Automated E2E test suite passed (142/142 tests) with IPFS evidence commit hash confirmed.
+                    </div>
+                    <button class="nh-btn-release" id="nh-demo-release-btn">
+                      Verify &amp; Release Tranche →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- State 2: /queue -->
+            <div class="nh-state-view" data-state="queue">
+              <div class="nh-cmd-layout">
+                <div class="nh-cmd-input">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>Search protocol actions, escrows, or contract queries...</span>
+                  <div class="nh-cmd-kbd-group">
+                    <kbd class="nh-cmd-kbd">⌘</kbd>
+                    <kbd class="nh-cmd-kbd">K</kbd>
+                  </div>
+                </div>
+
+                <div class="nh-cmd-section-tag">Suggestions &amp; Pending Tranches</div>
+
+                <div class="nh-cmd-row" data-first="true">
+                  <div class="nh-cmd-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="nh-cmd-title">Release Milestone 2</div>
+                    <div class="nh-cmd-hint">Execute atomic smart contract transfer for audited smart contract deliverable</div>
+                  </div>
+                  <span class="nh-cmd-chip">Contract</span>
+                </div>
+
+                <div class="nh-cmd-row">
+                  <div class="nh-cmd-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="nh-cmd-title">Submit Verification Proof</div>
+                    <div class="nh-cmd-hint">Anchor IPFS hash &amp; automated test logs to settlement smart contract</div>
+                  </div>
+                  <span class="nh-cmd-chip">Evidence</span>
+                </div>
+
+                <div class="nh-cmd-row">
+                  <div class="nh-cmd-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="12" y1="1" x2="12" y2="23"></line>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="nh-cmd-title">Deposit Escrow Collateral</div>
+                    <div class="nh-cmd-hint">Lock USDC funds into non-custodial multi-sig escrow on Polygon</div>
+                  </div>
+                  <span class="nh-cmd-chip">Deposit</span>
+                </div>
+
+                <div class="nh-cmd-row">
+                  <div class="nh-cmd-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="nh-cmd-title">Request Discretionary Review</div>
+                    <div class="nh-cmd-hint">Initiate 48-hour arbitration timer for mutual scope revision</div>
+                  </div>
+                  <span class="nh-cmd-chip">Review</span>
+                </div>
+
+                <p class="nh-cmd-footnote">
+                  Keyboard-first — every protocol action callable without the mouse
+                </p>
+              </div>
+            </div>
+
+            <!-- State 3: /milestones -->
+            <div class="nh-state-view" data-state="milestones">
+              <div class="nh-milestones-layout">
+                <div class="nh-milestones-grid">
+                  <div class="nh-milestone-block">
+                    <span class="nh-milestone-block-label">01 Spec</span>
+                    <div class="nh-milestone-block-slot" style="color:#22c55e;border-color:rgba(34,197,94,0.3);">✓ Done</div>
+                  </div>
+                  <div class="nh-milestone-block" data-active="true">
+                    <span class="nh-milestone-block-label">02 Contracts</span>
+                    <div class="nh-milestone-block-slot">Active</div>
+                  </div>
+                  <div class="nh-milestone-block">
+                    <span class="nh-milestone-block-label">03 Audit</span>
+                    <div class="nh-milestone-block-slot">Queued</div>
+                  </div>
+                  <div class="nh-milestone-block">
+                    <span class="nh-milestone-block-label">04 Testnet</span>
+                    <div class="nh-milestone-block-slot">Queued</div>
+                  </div>
+                  <div class="nh-milestone-block">
+                    <span class="nh-milestone-block-label">05 Netting</span>
+                    <div class="nh-milestone-block-slot">Queued</div>
+                  </div>
+                </div>
+
+                <div class="nh-milestones-card">
+                  <div class="nh-milestones-card-header">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <h4>Milestone 2 Delivery Queue</h4>
+                  </div>
+                  <p>
+                    Acceptance Criteria: Hardhat test suite passing, gas optimization report, and multi-sig vault deployment script verified on Polygon Amoy testnet.
+                  </p>
+                  <div class="nh-milestones-card-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    142/142 tests passing • IPFS CID anchored • Tranche ready
+                  </div>
+                </div>
+
+                <p class="nh-cmd-footnote">
+                  Deterministic settlement — funds release directly to contributor wallet on consensus
+                </p>
+              </div>
+            </div>
+
+            <!-- State 4: /audit -->
+            <div class="nh-state-view" data-state="audit">
+              <div class="nh-audit-layout">
+                <div class="nh-audit-top">
+                  <span>Consensus Layer Event Stream • Polygon PoS</span>
+                  <span style="color:var(--color-accent);">Live WebSocket Relay</span>
+                </div>
+
+                <div class="nh-audit-log-line">
+                  <span class="nh-log-time">14:02:18</span>
+                  <span class="nh-log-event">polygon.vault.deployed</span>
+                  <span class="nh-log-data">contract=0x71C...a4F9 gas=0.0014 MATIC</span>
+                  <span class="nh-log-status">200 OK</span>
+                </div>
+
+                <div class="nh-audit-log-line">
+                  <span class="nh-log-time">14:02:24</span>
+                  <span class="nh-log-event">usdc.escrow.funded</span>
+                  <span class="nh-log-data">amount=12,500.00 USDC from=0x83e...11c0</span>
+                  <span class="nh-log-status">200 OK</span>
+                </div>
+
+                <div class="nh-audit-log-line">
+                  <span class="nh-log-time">14:03:02</span>
+                  <span class="nh-log-event">evidence.ipfs.anchored</span>
+                  <span class="nh-log-data">cid=QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDD</span>
+                  <span class="nh-log-status">200 OK</span>
+                </div>
+
+                <div class="nh-audit-log-line">
+                  <span class="nh-log-time">14:03:15</span>
+                  <span class="nh-log-event">milestone.tests.passed</span>
+                  <span class="nh-log-data">suite="contracts_v2.test.js" tests=142 pass=142</span>
+                  <span class="nh-log-status">200 OK</span>
+                </div>
+
+                <div class="nh-audit-log-line">
+                  <span class="nh-log-time">14:03:40</span>
+                  <span class="nh-log-event">multisig.sign.confirmed</span>
+                  <span class="nh-log-data">signer=0x91d...55a1 sig_count=2/3</span>
+                  <span class="nh-log-status">200 OK</span>
+                </div>
+
+                <p class="nh-cmd-footnote">
+                  Verifiable state — every event indexed directly from consensus layer
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Dock (Raycast / Thread style) -->
+        <div class="nh-dock" role="tablist" aria-label="Preview tabs">
+          <button type="button" class="nh-dock-btn" data-tab="vaults" data-label="Vaults" data-active="true" aria-label="Escrow Vaults">
+            <span class="nh-dock-tip">Vaults</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </button>
+
+          <button type="button" class="nh-dock-btn" data-tab="queue" data-label="Queue" data-active="false" aria-label="Action Queue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+
+          <button type="button" class="nh-dock-btn" data-tab="milestones" data-label="Milestones" data-active="false" aria-label="Milestone Timeline">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </button>
+
+          <button type="button" class="nh-dock-btn" data-tab="audit" data-label="Audit Logs" data-active="false" aria-label="Audit Logs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Section: Real Tech Stack Marquee (Zero fake logos) -->
+      <div class="nh-marquee">
+        <div class="nh-marquee-track">
+          <div class="nh-marquee-item">Polygon Network</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">USDC (Circle)</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Solidity Smart Contracts</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Chainlink Oracles</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">IPFS Content Hashes</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Ethers.js</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">TypeScript</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Next.js</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">PostgreSQL</div>
+          <span class="nh-marquee-sep">•</span>
+          <!-- Duplicate for seamless infinite loop -->
+          <div class="nh-marquee-item">Polygon Network</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">USDC (Circle)</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Solidity Smart Contracts</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Chainlink Oracles</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">IPFS Content Hashes</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Ethers.js</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">TypeScript</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">Next.js</div>
+          <span class="nh-marquee-sep">•</span>
+          <div class="nh-marquee-item">PostgreSQL</div>
+        </div>
+      </div>
+
+      <!-- Section: Capabilities Bento Grid (Image 5 style) -->
+      <section class="nh-section" id="capabilities">
+        <div class="nh-bento">
+          <div class="nh-bento-title reveal">
+            <span class="section-label">Capabilities</span>
+            <h2 class="nh-bento-h2">
+              Everything you need for verifiable <em>milestone escrows.</em>
+            </h2>
+            <p class="nh-bento-desc">
+              Built for transparent milestone settlement — not opaque platforms or arbitrary dispute panels.
+            </p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3>Non-Custodial Multi-Sig Vaults</h3>
+            <p>Lock settlement USDC in programmable multi-sig smart contracts where funds only release on cryptographic consensus.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+            </div>
+            <h3>Deterministic Milestone Tranches</h3>
+            <p>Funds release incrementally as each verifiable milestone is validated — eliminating upfront risk and delayed payment.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div style="display:flex;gap:4px;">
+                <kbd class="nh-cmd-kbd">⌘</kbd>
+                <kbd class="nh-cmd-kbd">K</kbd>
+              </div>
+            </div>
+            <h3>Protocol Command Palette</h3>
+            <p>⌘K to jump anywhere — audit contracts, query transaction logs, or initiate payouts without leaving the keyboard.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+              </div>
+            </div>
+            <h3>Human-in-the-Loop Approval Queue</h3>
+            <p>Every contract release, revision, and milestone completion waits in an auditable queue — nothing moves without explicit sign-off.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+            </div>
+            <h3>Event Webhook &amp; State Relay</h3>
+            <p>Sub-second event listeners push blockchain confirmations directly to contributor dashboards with zero manual polling.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </div>
+            </div>
+            <h3>Tamper-Proof Evidence Archiving</h3>
+            <p>Deliverables, PR commits, and test outputs are hashed and permanently archived on decentralized storage.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+            </div>
+            <h3>Automated Split &amp; Netting</h3>
+            <p>Split payout tranches automatically across multi-member teams, tax reserves, and platform fees in a single atomic transaction.</p>
+          </div>
+
+          <div class="nh-bento-cell reveal">
+            <div class="nh-bento-visual">
+              <div class="nh-bento-icon-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3>Multi-Chain Native Settlement</h3>
+            <p>Deploy contracts natively on Polygon, Arbitrum, Base, or Ethereum for near-zero gas overhead.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT DEEP DIVE — 5-Tab Accordion
+       ═══════════════════════════════════════════ -->
+  <section class="deep-dive" id="deep-dive">
+    <div class="deep-dive__inner" style="padding: var(--section-padding);">
+      <div class="reveal" style="margin-bottom: var(--space-12);">
+        <span class="section-label">Protocol Architecture</span>
+        <h2 class="heading-lg">Built for precision, <em>engineered for scale.</em></h2>
+      </div>
+      
+      <div class="deep-dive__layout reveal">
+        <!-- Tabs -->
+        <div class="deep-dive__tabs">
+          <div class="deep-dive__tab active" data-tab="0">
+            <span class="deep-dive__tab-number">01</span>
+            <div class="deep-dive__tab-content">
+              <div class="deep-dive__tab-title">Global Settlement Network</div>
+              <p class="deep-dive__tab-desc">Multi-region payment corridors with native USDC settlement, netting, and route optimization.</p>
+            </div>
+          </div>
+          
+          <div class="deep-dive__tab" data-tab="1">
+            <span class="deep-dive__tab-number">02</span>
+            <div class="deep-dive__tab-content">
+              <div class="deep-dive__tab-title">AI Evidence Analysis</div>
+              <p class="deep-dive__tab-desc">AI inspects GitHub repos, deployments, and deliverables against acceptance criteria with confidence scoring.</p>
+            </div>
+          </div>
+          
+          <div class="deep-dive__tab" data-tab="2">
+            <span class="deep-dive__tab-number">03</span>
+            <div class="deep-dive__tab-content">
+              <div class="deep-dive__tab-title">Compliance Gate</div>
+              <p class="deep-dive__tab-desc">Automated compliance checks before funds are locked. Transparent audit trail of what passed and what requires review.</p>
+            </div>
+          </div>
+          
+          <div class="deep-dive__tab" data-tab="3">
+            <span class="deep-dive__tab-number">04</span>
+            <div class="deep-dive__tab-content">
+              <div class="deep-dive__tab-title">Smart Contract Flow</div>
+              <p class="deep-dive__tab-desc">Deterministic escrow state machine on Polygon. AI analyzes — smart contracts execute.</p>
+            </div>
+          </div>
+          
+          <div class="deep-dive__tab" data-tab="4">
+            <span class="deep-dive__tab-number">05</span>
+            <div class="deep-dive__tab-content">
+              <div class="deep-dive__tab-title">Settlement Optimization</div>
+              <p class="deep-dive__tab-desc">Netting, batching, and route optimization. Direct USDC or fiat off-ramp. Never custodies funds.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Panels -->
+        <div style="position: relative;">
+          <!-- Panel 1: Global Network -->
+          <div class="deep-dive__panel active" data-panel="0">
+            <div class="deep-dive__panel-visual">
+              <div style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: var(--space-2);">● ACTIVE CORRIDORS — LIVE NETWORK</div>
+              <div class="world-map-2d" id="world-map-panel"></div>
+              <div style="display: flex; gap: var(--space-6); font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; margin-top: var(--space-2);">
+                <span>○ CITIES WE SETTLE IN</span>
+                <span>● WHERE FREELANCERS BUILD FROM</span>
+              </div>
+              <div class="world-map-tags" id="world-map-tags" style="display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2);">
+                <button class="tag tag--active" data-city="sf">San Francisco</button>
+                <button class="tag" data-city="nyc">New York</button>
+                <button class="tag" data-city="london">London</button>
+                <button class="tag" data-city="amsterdam">Amsterdam</button>
+                <button class="tag" data-city="berlin">Berlin</button>
+                <button class="tag" data-city="delhi">Delhi</button>
+                <button class="tag" data-city="mumbai">Mumbai</button>
+                <button class="tag" data-city="hyderabad">Hyderabad</button>
+                <button class="tag" data-city="bengaluru">Bengaluru</button>
+                <button class="tag" data-city="singapore">Singapore</button>
+                <button class="tag" data-city="tokyo">Tokyo</button>
+                <button class="tag" data-city="dubai">Dubai</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Panel 2: AI Evidence -->
+          <div class="deep-dive__panel" data-panel="1">
+            <div class="deep-dive__panel-visual">
+              <div style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: var(--space-4);">MILESTONE: M3 — BACKEND + API IMPLEMENTATION</div>
+              
+              <div class="confidence-bar-group">
+                <div class="confidence-item">
+                  <div class="confidence-item__header">
+                    <span>REST API Endpoints</span>
+                    <span class="confidence-item__score">94%</span>
+                  </div>
+                  <div class="confidence-item__bar">
+                    <div class="confidence-item__fill" data-width="94%" style="width: 0%;"></div>
+                  </div>
+                </div>
+                
+                <div class="confidence-item">
+                  <div class="confidence-item__header">
+                    <span>Database Schema + Migrations</span>
+                    <span class="confidence-item__score">91%</span>
+                  </div>
+                  <div class="confidence-item__bar">
+                    <div class="confidence-item__fill" data-width="91%" style="width: 0%;"></div>
+                  </div>
+                </div>
+                
+                <div class="confidence-item">
+                  <div class="confidence-item__header">
+                    <span>Authentication (OAuth + JWT)</span>
+                    <span class="confidence-item__score">89%</span>
+                  </div>
+                  <div class="confidence-item__bar">
+                    <div class="confidence-item__fill" data-width="89%" style="width: 0%;"></div>
+                  </div>
+                </div>
+                
+                <div class="confidence-item">
+                  <div class="confidence-item__header">
+                    <span>Unit Test Coverage</span>
+                    <span class="confidence-item__score" style="color: var(--accent-amber);">67%</span>
+                  </div>
+                  <div class="confidence-item__bar">
+                    <div class="confidence-item__fill warning" data-width="67%" style="width: 0%;"></div>
+                  </div>
+                </div>
+                
+                <div class="confidence-item">
+                  <div class="confidence-item__header">
+                    <span>Deployment Verification</span>
+                    <span class="confidence-item__score">96%</span>
+                  </div>
+                  <div class="confidence-item__bar">
+                    <div class="confidence-item__fill" data-width="96%" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-top: var(--space-4); background: var(--bg-secondary);">
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em;">OVERALL CONFIDENCE</div>
+                  <div style="font-size: var(--fs-2xl); font-weight: var(--fw-bold); color: var(--accent-green);">87.4%</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em;">DECISION</div>
+                  <div style="font-size: var(--fs-md); font-weight: var(--fw-bold); color: var(--accent-amber);">⚠ HUMAN REVIEW</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em;">EVIDENCE</div>
+                  <div style="font-size: var(--fs-sm); color: var(--text-secondary);">GitHub + Deploy URL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Panel 3: Compliance -->
+          <div class="deep-dive__panel" data-panel="2">
+            <div class="deep-dive__panel-visual">
+              <div style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: var(--space-4);">PRE-ESCROW COMPLIANCE VERIFICATION</div>
+              
+              <div class="compliance-list">
+                <div class="compliance-item">
+                  <span class="compliance-item__icon pass">✓</span>
+                  <span>Identity Verification — Client & Freelancer KYC completed</span>
+                </div>
+                <div class="compliance-item">
+                  <span class="compliance-item__icon pass">✓</span>
+                  <span>Sanctions Screening — No matches found (OFAC, EU, UN)</span>
+                </div>
+                <div class="compliance-item">
+                  <span class="compliance-item__icon pass">✓</span>
+                  <span>Transaction Limit — $30,000 within daily threshold</span>
+                </div>
+                <div class="compliance-item">
+                  <span class="compliance-item__icon pass">✓</span>
+                  <span>Jurisdiction Check — India ↔ USA corridor approved</span>
+                </div>
+                <div class="compliance-item">
+                  <span class="compliance-item__icon review">⚠</span>
+                  <span>Enhanced Due Diligence — Pending for amounts &gt; $25,000</span>
+                </div>
+                <div class="compliance-item">
+                  <span class="compliance-item__icon pass">✓</span>
+                  <span>Smart Contract Security — Open-source bytecode verified on PolygonScan</span>
+                </div>
+              </div>
+              
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: var(--space-4); padding: var(--space-3); border-top: 1px solid var(--border-subtle);">
+                AUDIT TRAIL: TX-20260903-001 • COMPLIANCE ENGINE v2.4 • TIMESTAMP: 2026-09-03T14:22:31Z
+              </div>
+            </div>
+          </div>
+          
+          <!-- Panel 4: Smart Contract -->
+          <div class="deep-dive__panel" data-panel="3">
+            <div class="deep-dive__panel-visual">
+              <div style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: var(--space-4);">ESCROW STATE MACHINE — POLYGON MAINNET</div>
+              
+              <div class="state-diagram">
+                <div class="state-node highlight">CREATED</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node highlight">FUNDED</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node highlight">MILESTONE_ACTIVE</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node highlight">EVIDENCE_SUBMITTED</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node">AI_REVIEW</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node">APPROVED</div>
+                <span class="state-arrow">→</span>
+                <div class="state-node">RELEASED</div>
+              </div>
+              
+              <div style="margin-top: var(--space-6); padding: var(--space-4); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--bg-secondary);">
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-bottom: var(--space-3);">DISPUTE PATH:</div>
+                <div class="state-diagram" style="font-size: var(--fs-xs);">
+                  <div class="state-node">AI_REVIEW</div>
+                  <span class="state-arrow">→</span>
+                  <div class="state-node" style="border-color: var(--accent-amber); color: var(--accent-amber);">CONFLICT</div>
+                  <span class="state-arrow">→</span>
+                  <div class="state-node" style="border-color: var(--accent-amber); color: var(--accent-amber);">HUMAN_REVIEW</div>
+                  <span class="state-arrow">→</span>
+                  <div class="state-node">SIGNED_DECISION</div>
+                  <span class="state-arrow">→</span>
+                  <div class="state-node">RELEASE / REFUND</div>
+                </div>
+              </div>
+              
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: var(--space-4); padding: var(--space-3); border-top: 1px solid var(--border-subtle);">
+                CONTRACT: 0x742d...3a4b • NETWORK: POLYGON • TOKEN: USDC
+              </div>
+            </div>
+          </div>
+          
+          <!-- Panel 5: Settlement -->
+          <div class="deep-dive__panel" data-panel="4">
+            <div class="deep-dive__panel-visual">
+              <div style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: var(--space-4);">SETTLEMENT ROUTE OPTIMIZATION</div>
+              
+              <div class="settlement-visual">
+                <div class="settlement-column">
+                  <div class="settlement-node">Escrow Release<br><strong style="color: var(--accent-green);">$30,000 USDC</strong></div>
+                </div>
+                
+                <div class="settlement-connector">
+                  <div>↓</div>
+                  <div>OPTIMIZER</div>
+                  <div>↓</div>
+                </div>
+                
+                <div class="settlement-column">
+                  <div class="settlement-node">A. Direct USDC → Wallet<br><span style="color: var(--accent-green); font-size: 10px;">FASTEST — 0 FEE</span></div>
+                  <div class="settlement-node">B. Netting Match Found<br><span style="color: var(--accent-blue); font-size: 10px;">$12K NETTED — SAVE 0.3%</span></div>
+                  <div class="settlement-node">C. Fiat Off-Ramp (INR)<br><span style="color: var(--accent-amber); font-size: 10px;">VIA PARTNER — 1.2% FEE</span></div>
+                  <div class="settlement-node">D. Batch (3 payouts)<br><span style="color: var(--accent-purple); font-size: 10px;">GAS OPTIMIZED — 40% SAVINGS</span></div>
+                </div>
+              </div>
+              
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: var(--space-4); padding: var(--space-3); border-top: 1px solid var(--border-subtle);">
+                ⚠ SETTLEMENT ENGINE DOES NOT CUSTODY FUNDS — CALCULATES OPTIMAL ROUTE ONLY
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="/logo.png" alt="ChainLancer" class="footer__logo-img" />
+            <span class="footer__logo-text">ChainLancer</span>
+          </div>
+          <p class="footer__tagline">
+            Programmable payment infrastructure turning cross-border freelance agreements into auditable, automated workflows.
+          </p>
+          <div>
+            <div class="footer__social-label">KEEP IN TOUCH</div>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Twitter/X">𝕏</a>
+              <a href="#" class="footer__social-link" aria-label="GitHub">⌂</a>
+              <a href="#" class="footer__social-link" aria-label="Discord">◈</a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
+              <a href="#" class="footer__social-link" aria-label="Telegram">✈</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__column">
+          <div class="footer__column-title">PRODUCT</div>
+          <a href="#" class="footer__column-link">Escrow</a>
+          <a href="#" class="footer__column-link">Milestones</a>
+          <a href="#" class="footer__column-link">Evidence Analysis</a>
+          <a href="#" class="footer__column-link">Settlements</a>
+          <a href="#" class="footer__column-link">Compliance</a>
+        </div>
+        
+        <div class="footer__column">
+          <div class="footer__column-title">DEVELOPERS</div>
+          <a href="#" class="footer__column-link">Documentation</a>
+          <a href="#" class="footer__column-link">Smart Contracts</a>
+          <a href="#" class="footer__column-link">API Reference</a>
+          <a href="#" class="footer__column-link">GitHub</a>
+          <a href="#" class="footer__column-link">SDK</a>
+        </div>
+        
+        <div class="footer__column">
+          <div class="footer__column-title">COMPANY</div>
+          <a href="#" class="footer__column-link">About</a>
+          <a href="#" class="footer__column-link">Blog</a>
+          <a href="#" class="footer__column-link">Careers</a>
+          <a href="#" class="footer__column-link">Privacy Policy</a>
+          <a href="#" class="footer__column-link">Terms of Service</a>
+        </div>
+      </div>
+      
+      <div class="footer__bottom">
+        <span class="footer__copyright">© 2026 ChainLancer Protocol. All rights reserved.</span>
+        <a href="#" class="footer__bottom-link">↗ whitepaper.pdf</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING BANNER
+       ═══════════════════════════════════════════ -->
+  <div class="floating-banner" id="floating-banner">
+    ChainLancer Protocol is live on Polygon Mainnet
+    <button class="floating-banner__btn">Launch App →</button>
+    <button class="floating-banner__close" id="banner-close" aria-label="Close banner">×</button>
+  </div>
+
+  <!-- Main JS -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
