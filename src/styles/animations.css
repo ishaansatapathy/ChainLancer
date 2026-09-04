@@ -1,0 +1,363 @@
+/* ============================================
+   CHAINLANCER — Animations
+   ============================================ */
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 480ms; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 560ms; }
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Fade in from left ── */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Fade in from right ── */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Scale in ── */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Counter animation (animated via JS) ── */
+.counter-animated {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Pulse glow ── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-green-glow); }
+  50% { box-shadow: 0 0 20px 4px var(--accent-green-glow); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── Spin slow ── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* ── Blink dot ── */
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.blink-dot {
+  animation: blink-dot 2s ease-in-out infinite;
+}
+
+/* ── Shimmer (for loading states) ── */
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 0%,
+    var(--bg-elevated) 50%,
+    var(--bg-card) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ── Typing cursor ── */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '▋';
+  color: var(--accent-green);
+  animation: cursor-blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+/* ── Line draw (for connectors) ── */
+@keyframes line-draw {
+  from { stroke-dashoffset: 100%; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Hero background gradient animation ── */
+@keyframes hero-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── Deep dive panel visuals ── */
+
+/* State machine diagram */
+.state-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.state-node {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--ls-wide);
+  background: var(--bg-secondary);
+}
+
+.state-node.highlight {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  background: var(--accent-green-subtle);
+}
+
+.state-arrow {
+  color: var(--text-dim);
+  font-size: var(--fs-lg);
+}
+
+/* Confidence bars */
+.confidence-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+}
+
+.confidence-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.confidence-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  letter-spacing: var(--ls-wide);
+}
+
+.confidence-item__score {
+  font-weight: var(--fw-bold);
+  color: var(--accent-green);
+}
+
+.confidence-item__bar {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.confidence-item__fill {
+  height: 100%;
+  background: var(--accent-green);
+  border-radius: var(--radius-full);
+  transition: width 1s var(--ease-out);
+}
+
+.confidence-item__fill.warning {
+  background: var(--accent-amber);
+}
+
+/* Compliance checklist */
+.compliance-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4);
+}
+
+.compliance-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+.compliance-item__icon {
+  flex-shrink: 0;
+  font-size: var(--fs-md);
+}
+
+.compliance-item__icon.pass {
+  color: var(--accent-green);
+}
+
+.compliance-item__icon.review {
+  color: var(--accent-amber);
+}
+
+/* Settlement network */
+.settlement-visual {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+}
+
+.settlement-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.settlement-node {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.settlement-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent-green);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ls-wide);
+}
+
+/* World map dots (2D) */
+.world-map-2d {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 2.3 / 1;
+  background: radial-gradient(circle at 50% 50%, rgba(13, 20, 32, 0.95) 0%, rgba(6, 8, 14, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.world-map-tags .tag {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.world-map-tags .tag:hover {
+  border-color: var(--accent-green);
+  color: #ffffff;
+  background: rgba(0, 229, 117, 0.1);
+  transform: translateY(-1px);
+}
+
+.world-map-tags .tag.tag--active {
+  border-color: var(--accent-green);
+  background: var(--accent-green);
+  color: #050810;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(0, 229, 117, 0.35);
+}
