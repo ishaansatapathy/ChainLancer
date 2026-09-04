@@ -2,7 +2,10 @@ export const POLYGON_AMOY_CHAIN_ID = 80002;
 export const POLYGON_AMOY_CHAIN_ID_HEX = '0x13882';
 
 export function getAmoyRpcUrl() {
-  return import.meta.env.VITE_POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology';
+  return (
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_POLYGON_AMOY_RPC) ||
+    'https://polygon-amoy.drpc.org'
+  );
 }
 
 export const polygonAmoy = {
@@ -10,7 +13,7 @@ export const polygonAmoy = {
   name: 'Polygon Amoy',
   nativeCurrency: { name: 'POL', symbol: 'POL', decimals: 18 },
   rpcUrls: {
-    default: { http: [getAmoyRpcUrl()] }
+    default: { http: [getAmoyRpcUrl(), 'https://polygon-amoy-bor-rpc.publicnode.com'] }
   },
   blockExplorers: {
     default: { name: 'PolygonScan', url: 'https://amoy.polygonscan.com' }
@@ -21,7 +24,7 @@ export const polygonAmoyAddChainParams = {
   chainId: POLYGON_AMOY_CHAIN_ID_HEX,
   chainName: 'Polygon Amoy Testnet',
   nativeCurrency: { name: 'POL', symbol: 'POL', decimals: 18 },
-  rpcUrls: [getAmoyRpcUrl()],
+  rpcUrls: ['https://polygon-amoy.drpc.org', 'https://polygon-amoy-bor-rpc.publicnode.com'],
   blockExplorerUrls: ['https://amoy.polygonscan.com/']
 };
 

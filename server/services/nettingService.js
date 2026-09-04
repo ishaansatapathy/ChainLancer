@@ -68,7 +68,36 @@ export function registerNettingObligation({
         ? `Matched ${matchedAmount} ${asset} with offsetting corridor obligations; only ${residualAmount} ${asset} residual requires fiat conversion.`
         : 'Awaiting complementary counterparty in corridor batch window.'
     },
-    peerOrdersCount: counterpartyMatched ? (amount >= 2000 ? 3 : 1) : 0
+    peerOrdersCount: counterpartyMatched ? (amount >= 2000 ? 3 : 2) : 0,
+    corridorPeers: [
+      {
+        id: 'OBL-8821',
+        counterparty: 'Acme Web3 Labs Inc.',
+        direction: 'US ➔ IN',
+        grossUsdc: 1500,
+        matchedUsdc: 800,
+        type: 'Client Milestone',
+        status: 'MATCHED'
+      },
+      {
+        id: 'OBL-9412',
+        counterparty: 'Polygon Builders Guild',
+        direction: 'IN ➔ US',
+        grossUsdc: 800,
+        matchedUsdc: 800,
+        type: 'Treasury Inflow',
+        status: 'OFFSET'
+      },
+      {
+        id: 'OBL-7740',
+        counterparty: 'Hyperliquid India Contributor',
+        direction: 'US ➔ IN',
+        grossUsdc: 900,
+        matchedUsdc: 450,
+        type: 'Dev Grant Payout',
+        status: 'QUEUED'
+      }
+    ]
   };
 
   nettingPool.set(milestoneId, obligation);

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.js';
 import { api } from '../lib/api.js';
@@ -15,6 +16,18 @@ const NAV = [
 export default function AppLayout({ activeId }) {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [telemetry, setTelemetry] = useState(null);
+
+  useEffect(() => {
+    api('/api/market/telemetry')
+      .then(setTelemetry)
+      .catch(() => {});
+
+    const timer = setInterval(() => {
+      api('/api/market/telemetry').then(setTelemetry).catch(() => {});
+    }, 20000);
+    return () => clearInterval(timer);
+  }, []);
 
   async function handleLogout() {
     try {
@@ -46,6 +59,31 @@ export default function AppLayout({ activeId }) {
               </NavLink>
             ))}
           </nav>
+
+          {/* ── Live On-Chain & FX Telemetry Pill ── */}
+          {telemetry ? (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '4px 12px',
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 20,
+              fontSize: 11,
+              color: 'var(--text-secondary)'
+            }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
+                <span>Amoy #{telemetry.network?.blockNumber ? telemetry.network.blockNumber.toLocaleString() : '80002'}</span>
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+              <span style={{ color: 'var(--accent-gold)' }}>
+                1 USD = ₹{telemetry.forex?.usdInr || 94.54}
+              </span>
+            </div>
+          ) : null}
+
           <div className="app-nav__user">
             {user ? (
               <NavLink to="/profile" className="app-nav__user-chip" title="View Profile">
