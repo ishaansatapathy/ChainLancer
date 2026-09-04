@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import AuthLayout from '../components/AuthLayout.jsx';
 import { useAuth } from '../hooks/useAuth.js';
 import { useWallet } from '../hooks/useWallet.js';
+import OnramperCheckoutModal from '../components/OnramperCheckoutModal.jsx';
 
 export default function WalletPage() {
   const { loading } = useAuth({ redirect: true });
@@ -9,6 +11,7 @@ export default function WalletPage() {
   const navigate = useNavigate();
   const returnTo = params.get('return');
   const w = useWallet();
+  const [showOnramper, setShowOnramper] = useState(false);
 
   if (loading) return null;
 
@@ -51,10 +54,30 @@ export default function WalletPage() {
         <div className="status-grid wallet-grid">
           <div className="status-pill"><span>Address</span><strong>{w.addressDisplay}</strong></div>
           <div className="status-pill"><span>Network</span><strong>{w.networkDisplay}</strong></div>
-          <div className="status-pill"><span>Verified</span><strong>{w.verifiedDisplay}</strong></div>
-          <div className="status-pill"><span>Balance</span><strong>{w.onAmoy && w.connected ? w.balance : w.connected && !w.onAmoy ? 'Switch to Amoy' : '—'}</strong></div>
+          <div className="status-pill"><span>USDC Balance</span><strong style={{ color: '#86efac' }}>{w.onAmoy && w.connected ? w.usdcBalance : '—'}</strong></div>
+          <div className="status-pill"><span>Gas (POL)</span><strong>{w.onAmoy && w.connected ? w.balance : w.connected && !w.onAmoy ? 'Switch to Amoy' : '—'}</strong></div>
         </div>
         <div className="wallet-actions">
+          {w.connected && w.onAmoy ? (
+            <>
+              <button
+                type="button"
+                className="auth-google"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(59, 130, 246, 0.15)', borderColor: 'rgba(59, 130, 246, 0.4)', color: '#93c5fd' }}
+                onClick={w.addUsdcToMetaMask}
+              >
+                🦊 Add 20 USDC to MetaMask (1-Click)
+              </button>
+              <button
+                type="button"
+                className="auth-google"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(16, 185, 129, 0.15)', borderColor: 'rgba(16, 185, 129, 0.4)', color: '#86efac' }}
+                onClick={() => setShowOnramper(true)}
+              >
+                ⚡ Cash Out USDC to Bank (Onramper UPI / IMPS)
+              </button>
+            </>
+          ) : null}
           {!w.hasProvider ? (
             <button type="button" className="auth-google" onClick={() => window.open('https://metamask.io/download/', '_blank')}>
               Install MetaMask
@@ -91,6 +114,14 @@ export default function WalletPage() {
           ) : null}
         </div>
       </div>
+      <OnramperCheckoutModal
+        isOpen={showOnramper}
+        onClose={() => setShowOnramper(false)}
+        amountUsdc={20}
+        preferredFiat="INR"
+        fiatSymbol="₹"
+        fxRate={94.54}
+      />
     </AuthLayout>
   );
 }

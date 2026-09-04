@@ -54,7 +54,18 @@ export default function FundEscrowPage() {
         params: [acc, 'latest']
       });
       const pol = (parseInt(balHex, 16) / 1e18).toFixed(4);
-      setWalletBalance(`${pol} POL`);
+
+      const paddedAddr = acc.toLowerCase().replace('0x', '').padStart(64, '0');
+      const usdcHex = await window.ethereum.request({
+        method: 'eth_call',
+        params: [{
+          to: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
+          data: '0x70a08231' + paddedAddr
+        }, 'latest']
+      }).catch(() => '0x0');
+      const usdc = (parseInt(usdcHex, 16) / 1e6).toFixed(2);
+
+      setWalletBalance(`${usdc} USDC · ${pol} POL`);
     } catch {}
   }
 
