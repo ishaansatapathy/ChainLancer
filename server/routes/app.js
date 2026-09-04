@@ -15,7 +15,8 @@ import {
   reviewMilestone,
   getSettlementOptions,
   confirmSettlement,
-  dashboardSummary
+  dashboardSummary,
+  seedDemoContract
 } from '../services/contractService.js';
 import {
   getNettingPoolSummary,
@@ -50,6 +51,12 @@ export async function handleAppRoutes(req, res, url) {
       const user = await requireAuth(req);
       const body = await readJsonBody(req);
       const contract = await createContract(user, body);
+      return sendJson(res, 201, { contract });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/contracts/seed-demo') {
+      const user = await requireAuth(req);
+      const contract = await seedDemoContract(user);
       return sendJson(res, 201, { contract });
     }
 

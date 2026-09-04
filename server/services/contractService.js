@@ -364,3 +364,63 @@ export async function dashboardSummary(user) {
       : { upcoming: null, note: 'No settlement history yet' }
   };
 }
+
+export async function seedDemoContract(user) {
+  let client = await prisma.user.findFirst({ where: { role: 'client' } });
+  if (!client) {
+    client = await prisma.user.create({
+      data: {
+        email: 'acme-client@chainlancer.io',
+        fullName: 'Acme Web3 Foundation',
+        role: 'client',
+        kycStatus: 'VERIFIED',
+        amlStatus: 'CLEAR',
+        complianceStatus: 'APPROVED'
+      }
+    });
+  }
+
+  const isClient = user.role === 'client';
+  const clientId = isClient ? user.id : client.id;
+  const freelancerId = isClient ? null : user.id;
+
+  const contract = await prisma.contract.create({
+    data: {
+      clientId,
+      freelancerId,
+      counterpartyName: isClient ? 'Ishaan Satapathy' : 'Acme Web3 Foundation',
+      title: 'ChainLancer Escrow & Cross-Border Settlement Engine',
+      description: 'Production deployment of non-custodial Circle USDC milestone escrow on Polygon Amoy, Qship deliverable automated validation, 120s netting matcher, and Onramper settlement optimizer.',
+      totalAmount: 2200,
+      asset: 'USDC',
+      network: 'Polygon Amoy (80002)',
+      status: 'IN_PROGRESS',
+      escrowAddress: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
+      fundedAt: new Date(),
+      fundTxHash: '0x8f2d4e7a1b3c5e9d2f4a6b8c0d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5e7f',
+      milestones: {
+        create: [
+          {
+            title: 'Milestone 1: Smart Contract Escrow & Qship Verification',
+            description: 'Deploy ChainLancerEscrow.sol on Polygon Amoy with Circle USDC support, test coverage, and automated Qship 9-dimension inspection.',
+            amount: 1200,
+            requirements: '1. Circle USDC testnet integration (0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582)\n2. Non-custodial release & dispute arbitration\n3. 95% branch coverage with unit test suite\n4. Verified GitHub PR deliverable submission',
+            status: 'PENDING'
+          },
+          {
+            title: 'Milestone 2: Netting Matcher & Settlement Optimizer',
+            description: 'Implement 120s peer netting window and Onramper staging sell quotes for INR/EUR/USD fiat payout.',
+            amount: 1000,
+            requirements: '1. CandidateKey obligation matching within 120s\n2. Residual settlement calculation with >60% fee savings\n3. Multi-gateway ranking (Transak, MoonPay, Banxa, OTC)\n4. Polygon Amoy direct release option',
+            status: 'PENDING'
+          }
+        ]
+      }
+    },
+    include: CONTRACT_INCLUDE
+  });
+
+  await audit(user.id, 'DEMO_CONTRACT_SEEDED', { contractId: contract.id });
+  return publicContract(contract, user.id);
+}
+
