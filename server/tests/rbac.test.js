@@ -10,11 +10,10 @@ process.env.DEMO_MODE = 'true';
 process.env.KYC_PROVIDER = 'mock';
 process.env.AML_PROVIDER = 'mock';
 
-const { db } = await import('../db.js');
+const { prisma } = await import('../db.js');
 const { evaluateCompliance } = await import('../services/compliancePolicyEngine.js');
 const { assignRole } = await import('../services/onboardingService.js');
 const { requireRole, requireAuth } = await import('../middleware/auth.js');
-const { createUserDefaults } = await import('../models/user.js');
 const { completeMockKyc } = await import('../services/kycService.js');
 const { MockAMLProvider } = await import('../providers/aml/index.js');
 
@@ -48,25 +47,33 @@ describe('RBAC', () => {
   let client;
   let freelancer;
 
-  before(() => {
-    client = db.users.upsert(createUserDefaults({
-      id: 'user-client',
-      email: 'client@test.com',
-      fullName: 'Client User',
-      role: 'client',
-      kycStatus: 'VERIFIED',
-      amlStatus: 'CLEAR',
-      complianceStatus: 'APPROVED'
-    }));
-    freelancer = db.users.upsert(createUserDefaults({
-      id: 'user-freelancer',
-      email: 'freelancer@test.com',
-      fullName: 'Freelancer User',
-      role: 'freelancer',
-      kycStatus: 'VERIFIED',
-      amlStatus: 'CLEAR',
-      complianceStatus: 'APPROVED'
-    }));
+  before(async () => {
+    client = await prisma.user.upsert({
+      where: { email: 'client-test@chainlancer.io' },
+      update: { role: 'client', kycStatus: 'VERIFIED', amlStatus: 'CLEAR', complianceStatus: 'APPROVED' },
+      create: {
+        id: 'user-client-test',
+        email: 'client-test@chainlancer.io',
+        fullName: 'Client User',
+        role: 'client',
+        kycStatus: 'VERIFIED',
+        amlStatus: 'CLEAR',
+        complianceStatus: 'APPROVED'
+      }
+    });
+    freelancer = await prisma.user.upsert({
+      where: { email: 'freelancer-test@chainlancer.io' },
+      update: { role: 'freelancer', kycStatus: 'VERIFIED', amlStatus: 'CLEAR', complianceStatus: 'APPROVED' },
+      create: {
+        id: 'user-freelancer-test',
+        email: 'freelancer-test@chainlancer.io',
+        fullName: 'Freelancer User',
+        role: 'freelancer',
+        kycStatus: 'VERIFIED',
+        amlStatus: 'CLEAR',
+        complianceStatus: 'APPROVED'
+      }
+    });
   });
 
   test('client passes client role check', () => {
@@ -84,20 +91,24 @@ describe('RBAC', () => {
     assert.throws(() => requireRole('client')(freelancer), (err) => err.status === 403);
   });
 
-  test('role assigned once — cannot change', () => {
-    assert.throws(() => assignRole(client, 'freelancer'), /already assigned/i);
+  test('role assigned once — cannot change', async () => {
+    await assert.rejects(() => assignRole(client, 'freelancer'), /already assigned/i);
   });
 });
 
 describe('KYC + AML flow', () => {
   test('mock KYC verified triggers AML and compliance', async () => {
-    const user = db.users.upsert(createUserDefaults({
-      id: 'user-kyc',
-      email: 'kyc@test.com',
-      fullName: 'Demo User',
-      role: 'client',
-      country: 'IN'
-    }));
+    const user = await prisma.user.upsert({
+      where: { email: 'kyc-test@chainlancer.io' },
+      update: { kycStatus: 'NOT_STARTED', amlStatus: 'NOT_SCREENED', complianceStatus: 'PENDING' },
+      create: {
+        id: 'user-kyc-test',
+        email: 'kyc-test@chainlancer.io',
+        fullName: 'Demo User',
+        role: 'client',
+        country: 'IN'
+      }
+    });
     const updated = await completeMockKyc(user, 'VERIFIED');
     assert.equal(updated.kycStatus, 'VERIFIED');
     assert.equal(updated.amlStatus, 'CLEAR');
@@ -119,8 +130,8 @@ describe('KYC + AML flow', () => {
 });
 
 describe('Auth guards', () => {
-  test('unauthenticated request throws 401', () => {
+  test('unauthenticated request throws 401', async () => {
     const req = { headers: {} };
-    assert.throws(() => requireAuth(req), (err) => err.status === 401);
+    await assert.rejects(() => requireAuth(req), (err) => err.status === 401);
   });
 });

@@ -17,6 +17,7 @@ server/data
 # Cloned OSS services (run npm run setup:oss to fetch)
 services/simple-kyc-oss/
 services/yente/
+services/qship/
 
 # Editor directories and files
 .vscode/*
