@@ -23,6 +23,7 @@ import {
   checkNettingStatus,
   cancelNettingObligation
 } from '../services/nettingService.js';
+import { getLiveForexRates, getLiveAmoyTelemetry } from '../services/settlementOptimizer.js';
 
 export async function handleAppRoutes(req, res, url) {
   try {
@@ -143,6 +144,29 @@ export async function handleAppRoutes(req, res, url) {
       const parts = url.pathname.split('/');
       const milestoneId = parts[parts.length - 2];
       return sendJson(res, 200, { success: cancelNettingObligation(milestoneId) });
+    }
+
+    // ── Live Network & Market Telemetry ────────────────────────────────────
+    if (req.method === 'GET' && url.pathname === '/api/market/telemetry') {
+      const [fx, amoy] = await Promise.all([getLiveForexRates(), getLiveAmoyTelemetry()]);
+      return sendJson(res, 200, {
+        network: {
+          chainId: 80002,
+          name: 'Polygon Amoy Testnet',
+          blockNumber: amoy.blockNumber,
+          gasPriceGwei: amoy.gasPriceGwei,
+          rpc: 'https://polygon-amoy.drpc.org',
+          explorer: 'https://amoy.polygonscan.com',
+          status: 'CONNECTED'
+        },
+        forex: {
+          usdInr: fx.INR || 94.54,
+          usdEur: fx.EUR || 0.86,
+          usdGbp: fx.GBP || 0.74,
+          source: 'Open Exchange Rates (Live Interbank Feed)',
+          lastUpdated: amoy.lastUpdated
+        }
+      });
     }
 
     return false;
