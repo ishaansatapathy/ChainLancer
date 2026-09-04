@@ -8,8 +8,7 @@ import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 const testDir = mkdtempSync(path.join(tmpdir(), 'chainlancer-wallet-test-'));
 process.env.TEST_DATA_DIR = testDir;
 
-const { db } = await import('../db.js');
-const { createUserDefaults } = await import('../models/user.js');
+const { prisma } = await import('../db.js');
 const {
   createWalletChallengeForAddress,
   verifyWalletOwnership
@@ -39,23 +38,27 @@ describe('Wallet address validation', () => {
 describe('Wallet challenge + verification', () => {
   let user;
 
-  before(() => {
-    user = db.users.upsert(createUserDefaults({
-      id: 'wallet-user-1',
-      email: 'wallet@test.com',
-      fullName: 'Wallet User'
-    }));
+  before(async () => {
+    user = await prisma.user.upsert({
+      where: { email: 'wallet-test-1@chainlancer.io' },
+      update: { walletVerified: false, walletAddress: null },
+      create: {
+        id: 'wallet-user-test-1',
+        email: 'wallet-test-1@chainlancer.io',
+        fullName: 'Wallet User'
+      }
+    });
   });
 
-  test('challenge creation returns message with nonce', () => {
-    const challenge = createWalletChallengeForAddress(user, account.address);
+  test('challenge creation returns message with nonce', async () => {
+    const challenge = await createWalletChallengeForAddress(user, account.address);
     assert.ok(challenge.nonce);
     assert.ok(challenge.message.includes(challenge.nonce));
     assert.ok(challenge.message.includes(account.address));
   });
 
   test('successful signature verification links wallet', async () => {
-    const challenge = createWalletChallengeForAddress(user, account.address);
+    const challenge = await createWalletChallengeForAddress(user, account.address);
     const signature = await account.signMessage({ message: challenge.message });
     const updated = await verifyWalletOwnership(user, {
       walletAddress: account.address,
@@ -64,11 +67,11 @@ describe('Wallet challenge + verification', () => {
     });
     assert.equal(updated.walletVerified, true);
     assert.equal(updated.walletAddress, account.address);
-    assert.equal(updated.walletChainId, 80002);
+    assert.equal(String(updated.walletChainId), '80002');
   });
 
   test('replayed nonce rejected', async () => {
-    const challenge = createWalletChallengeForAddress(user, account.address);
+    const challenge = await createWalletChallengeForAddress(user, account.address);
     const signature = await account.signMessage({ message: challenge.message });
     await verifyWalletOwnership(user, {
       walletAddress: account.address,
@@ -86,12 +89,16 @@ describe('Wallet challenge + verification', () => {
   });
 
   test('invalid signature rejected', async () => {
-    const fresh = db.users.upsert(createUserDefaults({
-      id: 'wallet-user-2',
-      email: 'wallet2@test.com',
-      fullName: 'Wallet Two'
-    }));
-    const challenge = createWalletChallengeForAddress(fresh, account2.address);
+    const fresh = await prisma.user.upsert({
+      where: { email: 'wallet-test-2@chainlancer.io' },
+      update: {},
+      create: {
+        id: 'wallet-user-test-2',
+        email: 'wallet-test-2@chainlancer.io',
+        fullName: 'Wallet Two'
+      }
+    });
+    const challenge = await createWalletChallengeForAddress(fresh, account2.address);
     const badSig = await account.signMessage({ message: challenge.message });
     await assert.rejects(
       () => verifyWalletOwnership(fresh, {
@@ -104,12 +111,16 @@ describe('Wallet challenge + verification', () => {
   });
 
   test('wallet uniqueness enforced', async () => {
-    const other = db.users.upsert(createUserDefaults({
-      id: 'wallet-user-3',
-      email: 'wallet3@test.com',
-      fullName: 'Wallet Three'
-    }));
-    const challenge = createWalletChallengeForAddress(other, account.address);
+    const other = await prisma.user.upsert({
+      where: { email: 'wallet-test-3@chainlancer.io' },
+      update: {},
+      create: {
+        id: 'wallet-user-test-3',
+        email: 'wallet-test-3@chainlancer.io',
+        fullName: 'Wallet Three'
+      }
+    });
+    const challenge = await createWalletChallengeForAddress(other, account.address);
     const signature = await account.signMessage({ message: challenge.message });
     await assert.rejects(
       () => verifyWalletOwnership(other, {
@@ -122,14 +133,21 @@ describe('Wallet challenge + verification', () => {
   });
 
   test('expired nonce rejected', async () => {
-    const expiredUser = db.users.upsert(createUserDefaults({
-      id: 'wallet-user-4',
-      email: 'wallet4@test.com',
-      fullName: 'Wallet Four'
-    }));
-    const challenge = createWalletChallengeForAddress(expiredUser, account2.address);
-    db.users.update(expiredUser.id, {
-      walletNonceExpiresAt: new Date(Date.now() - 1000).toISOString()
+    const expiredUser = await prisma.user.upsert({
+      where: { email: 'wallet-test-4@chainlancer.io' },
+      update: {},
+      create: {
+        id: 'wallet-user-test-4',
+        email: 'wallet-test-4@chainlancer.io',
+        fullName: 'Wallet Four'
+      }
+    });
+    const challenge = await createWalletChallengeForAddress(expiredUser, account2.address);
+    await prisma.user.update({
+      where: { id: expiredUser.id },
+      data: {
+        walletNonceExpiresAt: new Date(Date.now() - 1000)
+      }
     });
     const signature = await account2.signMessage({ message: challenge.message });
     await assert.rejects(
@@ -144,8 +162,8 @@ describe('Wallet challenge + verification', () => {
 });
 
 describe('Auth guards for wallet routes', () => {
-  test('unauthenticated request throws 401', () => {
-    assert.throws(() => requireAuth({ headers: {} }), (err) => err.status === 401);
+  test('unauthenticated request throws 401', async () => {
+    await assert.rejects(() => requireAuth({ headers: {} }), (err) => err.status === 401);
   });
 });
 

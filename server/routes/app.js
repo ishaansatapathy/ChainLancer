@@ -11,11 +11,17 @@ import {
   attemptFundEscrow,
   participateContract,
   submitDeliverable,
+  validateMilestone,
   reviewMilestone,
   getSettlementOptions,
   confirmSettlement,
   dashboardSummary
 } from '../services/contractService.js';
+import {
+  getNettingPoolSummary,
+  checkNettingStatus,
+  cancelNettingObligation
+} from '../services/nettingService.js';
 
 export async function handleAppRoutes(req, res, url) {
   try {
@@ -89,6 +95,11 @@ export async function handleAppRoutes(req, res, url) {
           return sendJson(res, 200, { contract: await submitDeliverable(id, milestoneId, user, body) });
         }
 
+        if (req.method === 'POST' && msSub === '/validate') {
+          const user = await requireAuth(req);
+          return sendJson(res, 200, await validateMilestone(id, milestoneId, user));
+        }
+
         if (req.method === 'POST' && msSub === '/review') {
           const user = await requireAuth(req);
           const body = await readJsonBody(req);
@@ -106,6 +117,25 @@ export async function handleAppRoutes(req, res, url) {
           return sendJson(res, 200, await confirmSettlement(id, milestoneId, user, body));
         }
       }
+    }
+
+    // ── Netting Engine API Routes ──────────────────────────────────────────
+    if (req.method === 'GET' && url.pathname === '/api/settlement/netting/pool') {
+      await requireAuth(req);
+      return sendJson(res, 200, getNettingPoolSummary());
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/settlement/netting/check') {
+      await requireAuth(req);
+      const body = await readJsonBody(req);
+      return sendJson(res, 200, checkNettingStatus(body.milestoneId, body.amount, body.country, body.fiat, body.asset));
+    }
+
+    if (req.method === 'POST' && url.pathname.startsWith('/api/settlement/netting/') && url.pathname.endsWith('/cancel')) {
+      await requireAuth(req);
+      const parts = url.pathname.split('/');
+      const milestoneId = parts[parts.length - 2];
+      return sendJson(res, 200, { success: cancelNettingObligation(milestoneId) });
     }
 
     return false;
