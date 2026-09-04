@@ -294,21 +294,35 @@ export async function getSettlementOptions(contractId, milestoneId, user) {
   };
 }
 
-export async function confirmSettlement(contractId, milestoneId, user, { routeId, txHash }) {
+export async function confirmSettlement(contractId, milestoneId, user, { routeId, txHash, clientTxHash }) {
   const c = await getContractForUser(contractId, user);
   const ms = c.milestones.find((m) => m.id === milestoneId);
   if (!ms) throw new ApiError(404, 'Milestone not found');
-
   const options = await getSettlementOptions(contractId, milestoneId, user);
   const isDirectOnChain = routeId === 'direct-onchain-usdc';
+  const onramperMatch = options.onramper?.quotes?.find((q) => q.ramp === routeId || `onramper-${q.ramp}` === routeId);
   const route = isDirectOnChain
     ? options.onChainRoute
-    : (options.routes.find((r) => r.id === routeId) || options.recommended);
+    : (options.routes?.find((r) => r.id === routeId) ||
+       (onramperMatch
+         ? {
+             id: `onramper-${onramperMatch.ramp}`,
+             type: `Onramper · ${onramperMatch.rampName} (${onramperMatch.paymentMethodName})`,
+             provider: onramperMatch.rampName,
+             cost: onramperMatch.totalFee,
+             netUsdc: Math.round((onramperMatch.cryptoAmount - onramperMatch.totalFee) * 100) / 100,
+             estimatedFiat: onramperMatch.fiatAmount,
+             fiatSymbol: options.fiatSymbol || '₹',
+             settlementMinutes: onramperMatch.settlementMinutes
+           }
+         : options.recommended));
 
   await prisma.milestone.update({
     where: { id: milestoneId },
     data: { status: 'RELEASED', releasedAmount: ms.amount }
   });
+
+  const effectiveTxHash = txHash || clientTxHash || null;
 
   const settlement = {
     routeId: route.id,
@@ -319,8 +333,8 @@ export async function confirmSettlement(contractId, milestoneId, user, { routeId
     estimatedFiat: route.estimatedFiat,
     fiatSymbol: route.fiatSymbol,
     isDirectOnChain: Boolean(isDirectOnChain),
-    txHash: txHash || (isDirectOnChain ? `0xsimulated_release_${randomUUID().replace(/-/g, '').slice(0, 32)}` : null),
-    simulated: !txHash,
+    txHash: effectiveTxHash,
+    simulated: !effectiveTxHash,
     completedAt: new Date().toISOString(),
     reference: isDirectOnChain ? `AMOY-${randomUUID().slice(0, 8).toUpperCase()}` : `SETTLE-${randomUUID().slice(0, 8).toUpperCase()}`
   };

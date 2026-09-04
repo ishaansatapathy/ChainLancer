@@ -3,8 +3,10 @@ import {
   createPublicClient,
   createWalletClient,
   custom,
+  fallback,
   formatEther,
   getAddress,
+  http,
   isAddress
 } from 'viem';
 import {
@@ -35,6 +37,7 @@ export function useWallet() {
   const [chainId, setChainId] = useState(null);
   const [backendWallet, setBackendWallet] = useState(null);
   const [balance, setBalance] = useState('—');
+  const [usdcBalance, setUsdcBalance] = useState('—');
 
   const getProvider = () => window.ethereum;
   const hasProvider = () => Boolean(getProvider());
@@ -47,7 +50,12 @@ export function useWallet() {
   }, []);
 
   const publicClient = useCallback(() => {
-    return createPublicClient({ chain: polygonAmoy, transport: custom(getProvider()) });
+    const provider = getProvider();
+    const transports = [];
+    if (provider) transports.push(custom(provider));
+    transports.push(http('https://polygon-amoy-bor-rpc.publicnode.com'));
+    transports.push(http('https://polygon-amoy.drpc.org'));
+    return createPublicClient({ chain: polygonAmoy, transport: fallback(transports) });
   }, []);
 
   const readChainId = useCallback(async () => {
@@ -65,6 +73,41 @@ export function useWallet() {
       return 'Unavailable';
     }
   }, [publicClient]);
+
+  const readUsdcBalance = useCallback(async (address) => {
+    try {
+      const bal = await publicClient().readContract({
+        address: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
+        abi: [{ name: 'balanceOf', type: 'function', inputs: [{ name: 'account', type: 'address' }], outputs: [{ type: 'uint256' }] }],
+        functionName: 'balanceOf',
+        args: [getAddress(address)]
+      });
+      return `${(Number(bal) / 1e6).toFixed(2)} USDC`;
+    } catch {
+      return '0.00 USDC';
+    }
+  }, [publicClient]);
+
+  const addUsdcToMetaMask = useCallback(async () => {
+    const provider = getProvider();
+    if (!provider) return;
+    try {
+      await provider.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
+            symbol: 'USDC',
+            decimals: 6,
+            image: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png'
+          }
+        }
+      });
+    } catch (err) {
+      console.error('wallet_watchAsset error:', err);
+    }
+  }, []);
 
   const switchToAmoy = useCallback(async () => {
     const provider = getProvider();
@@ -132,10 +175,12 @@ export function useWallet() {
   useEffect(() => {
     if (connectedAddress && isOnAmoy()) {
       readBalance(connectedAddress).then(setBalance);
+      readUsdcBalance(connectedAddress).then(setUsdcBalance);
     } else {
       setBalance('—');
+      setUsdcBalance('—');
     }
-  }, [connectedAddress, chainId, readBalance]);
+  }, [connectedAddress, chainId, readBalance, readUsdcBalance]);
 
   const connected = Boolean(connectedAddress);
   const onAmoy = isOnAmoy();
@@ -246,6 +291,8 @@ export function useWallet() {
     backendVerified,
     connectedAddress,
     balance,
+    usdcBalance,
+    addUsdcToMetaMask,
     statusText,
     addressDisplay: connected ? shortenAddress(connectedAddress) : 'Not connected',
     networkDisplay: connected ? (onAmoy ? 'Amoy' : `Chain ${chainId}`) : '—',

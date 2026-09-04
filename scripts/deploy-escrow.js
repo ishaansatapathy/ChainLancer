@@ -16,7 +16,7 @@ const polygonAmoy = defineChain({
   rpcUrls: {
     default: {
       http: [
-        process.env.POLYGON_AMOY_RPC || 'https://rpc-amoy.polygon.technology'
+        process.env.POLYGON_AMOY_RPC || 'https://polygon-amoy.drpc.org'
       ]
     }
   },
@@ -62,7 +62,8 @@ async function main() {
     console.error('❌ Insufficient POL for gas fees.');
     console.error('Please request free testnet POL for address:', account.address);
     console.error('Faucet: https://faucet.polygon.technology/ or https://discord.com/invite/0xPolygon');
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
 
   const artifactPath = path.join(root, 'contracts', 'artifacts', 'ChainLancerEscrow.json');
