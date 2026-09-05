@@ -103,7 +103,7 @@ function renderOptimizer(data) {
               </div>
               <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">${q.paymentMethodName}</div>
               <div style="font-size:16px;font-weight:700;color:var(--accent-gold)">${data.fiatSymbol || '₹'}${q.fiatAmount.toLocaleString()}</div>
-              <div style="font-size:10px;color:var(--text-muted);margin-top:4px">Fee: $${q.totalFee} · ETA: ~${q.settlementMinutes}m</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:4px">Fee: $${q.totalFee} · Estimated Settlement: ~${q.settlementMinutes}m</div>
             </div>
           `).join('')}
         </div>

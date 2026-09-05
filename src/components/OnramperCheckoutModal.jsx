@@ -331,7 +331,7 @@ export default function OnramperCheckoutModal({
                           ) : null}
                         </div>
                         <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>
-                          {q.paymentMethodName} · ETA: ~{q.settlementMinutes}m · ★ {q.rating}
+                          {q.paymentMethodName} · Estimated Settlement: ~{q.settlementMinutes}m · ★ {q.rating}
                         </div>
                       </div>
                     </div>
