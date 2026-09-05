@@ -65,9 +65,19 @@ export default function WalletPage() {
                 className="auth-google"
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(59, 130, 246, 0.15)', borderColor: 'rgba(59, 130, 246, 0.4)', color: '#93c5fd' }}
                 onClick={w.addUsdcToMetaMask}
+                title="Imports the USDC contract into MetaMask so your balance is visible"
               >
-                🦊 Add 20 USDC to MetaMask (1-Click)
+                🦊 Import USDC Token in MetaMask (Show in List)
               </button>
+              <a
+                href="https://faucet.circle.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="auth-google"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(217, 119, 6, 0.15)', borderColor: 'rgba(217, 119, 6, 0.4)', color: '#fbbf24', textDecoration: 'none' }}
+              >
+                🚰 Get Free Testnet USDC (Circle Official Faucet)
+              </a>
               <button
                 type="button"
                 className="auth-google"
