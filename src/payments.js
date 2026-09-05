@@ -17,7 +17,7 @@ async function bootstrap() {
         ? data.payments.map((p) => `
           <div class="app-list-item">
             <div>
-              <strong style="color:#86efac">+${fmtMoney(p.amount, p.asset)}</strong>
+              <strong style="color:var(--accent-gold)">+${fmtMoney(p.amount, p.asset)}</strong>
               <br><span style="font-size:12px;color:#737373">${p.label}${p.simulated ? ' · simulated' : ''}</span>
             </div>
             <span style="font-size:12px;color:#a3a3a3">${p.status}</span>

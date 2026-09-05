@@ -63,7 +63,7 @@ export default function DashboardPage() {
             onClick={handleSeedDemo}
             disabled={seeding}
           >
-            {seeding ? 'Initializing Demo Escrow...' : '⚡ Initialize Hackathon Demo Contract'}
+            {seeding ? 'Initializing Demo Escrow...' : 'Initialize Hackathon Demo Contract'}
           </button>
           <Link to="/contracts/create" className="app-btn app-btn--primary">
             + New Contract Agreement
@@ -140,7 +140,7 @@ export default function DashboardPage() {
                 onClick={handleSeedDemo}
                 disabled={seeding}
               >
-                {seeding ? 'Setting up...' : '⚡ Quick-Launch Demo Project'}
+                {seeding ? 'Setting up...' : 'Quick-Launch Demo Project'}
               </button>
             </div>
           )}
@@ -176,7 +176,7 @@ export default function DashboardPage() {
             data.payments.map((p, i) => (
               <div key={i} className="app-list-item">
                 <div>
-                  <strong style={{ color: '#86efac' }}>+{fmtMoney(p.amount, p.asset)}</strong>
+                  <strong style={{ color: 'var(--accent-gold)' }}>+{fmtMoney(p.amount, p.asset)}</strong>
                   <br />
                   <span style={{ fontSize: 12, color: '#737373' }}>
                     {p.label}{p.simulated ? ' (simulated)' : ''}
@@ -199,11 +199,11 @@ export default function DashboardPage() {
           <div className="app-card__title">Cross-Border Settlement Architecture</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 12, fontSize: 13, color: 'var(--text-secondary)' }}>
             <div>
-              <strong style={{ color: 'var(--accent-cyan)' }}>1. Polygon Amoy Smart Contract:</strong>
+              <strong style={{ color: 'var(--accent-gold)' }}>1. Polygon Amoy Smart Contract:</strong>
               <p style={{ margin: '2px 0 0', fontSize: 12 }}>Circle USDC held in non-custodial milestone vaults with payer approval gates.</p>
             </div>
             <div>
-              <strong style={{ color: '#86efac' }}>2. Qship AI Deliverable Inspector:</strong>
+              <strong style={{ color: '#e5b869' }}>2. Qship AI Deliverable Inspector:</strong>
               <p style={{ margin: '2px 0 0', fontSize: 12 }}>Automated 9-dimension review against acceptance criteria before approval.</p>
             </div>
             <div>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
               <p style={{ margin: '2px 0 0', fontSize: 12 }}>Offsets corridor obligations off-chain, cutting FX conversion spreads by 60–80%.</p>
             </div>
             <div>
-              <strong style={{ color: 'var(--text-primary)' }}>4. Onramper Route Optimizer:</strong>
+              <strong style={{ color: '#fafaf9' }}>4. Onramper Route Optimizer:</strong>
               <p style={{ margin: '2px 0 0', fontSize: 12 }}>Ranks live fiat payout routes (Transak UPI, MoonPay, Banxa) by highest net payout.</p>
             </div>
           </div>

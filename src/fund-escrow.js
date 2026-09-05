@@ -24,8 +24,8 @@ async function bootstrap() {
       <p>Funds are locked by the smart contract and released according to the contract conditions.</p>
     </div>
     <div id="fund-error" class="app-error" hidden></div>
-    <div id="fund-success" class="app-card" hidden style="border-color:rgba(134,239,172,0.4)">
-      <p style="color:#86efac">✓ Escrow funded</p>
+    <div id="fund-success" class="app-card" hidden style="border-color:rgba(201,168,76,0.3)">
+      <p style="color:var(--accent-gold);font-weight:600">✓ Escrow funded</p>
       <p class="app-note" id="fund-tx"></p>
       <a class="app-btn app-btn--ghost" id="explorer-link" target="_blank" rel="noopener">View on Polygon Explorer</a>
     </div>

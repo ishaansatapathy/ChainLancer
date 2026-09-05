@@ -28,18 +28,19 @@
   --accent-gold-hover: #d8b85c;
   --accent-gold-glow: rgba(201, 168, 76, 0.25);
   --accent-gold-subtle: rgba(201, 168, 76, 0.08);
+  --accent-cyan: #c9a84c;
   --accent-green: #c9a84c; /* Brand primary is gold */
   --accent-green-dim: #b8953b;
   --accent-green-glow: rgba(201, 168, 76, 0.25);
   --accent-green-subtle: rgba(201, 168, 76, 0.08);
-  --status-success: #22c55e;
-  --accent-orange: #f59e0b;
-  --accent-orange-glow: rgba(245, 158, 11, 0.25);
-  --accent-blue: #60a5fa;
-  --accent-blue-glow: rgba(96, 165, 250, 0.15);
-  --accent-amber: #f59e0b;
-  --accent-red: #ef4444;
-  --accent-purple: #c084fc;
+  --status-success: #c9a84c;
+  --accent-orange: #d4af37;
+  --accent-orange-glow: rgba(212, 175, 55, 0.25);
+  --accent-blue: #c9a84c;
+  --accent-blue-glow: rgba(201, 168, 76, 0.15);
+  --accent-amber: #c9a84c;
+  --accent-red: #f43f5e;
+  --accent-purple: #c9a84c;
 
   /* ── Text Colors ── */
   --text-primary: #fafaf9;

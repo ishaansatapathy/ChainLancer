@@ -46,8 +46,8 @@ function render(c, ms) {
         <p class="app-note">${ms.disputeReason || 'Dispute under review.'}</p>
       </div>` : ''}
     ${ms.status === 'APPROVED' ? `
-      <div class="app-card" style="margin-top:16px;border-color:rgba(134,239,172,0.3)">
-        <p style="color:#86efac">✓ Milestone approved</p>
+      <div class="app-card" style="margin-top:16px;border-color:rgba(201,168,76,0.3)">
+        <p style="color:var(--accent-gold);font-weight:600">✓ Milestone approved</p>
         <p class="app-note">Client approval → smart contract → USDC released (when on-chain integration is active).</p>
         <a class="app-btn app-btn--gold" href="/settlement.html?contractId=${contractId}&milestoneId=${milestoneId}">Continue to Settlement</a>
       </div>` : ''}

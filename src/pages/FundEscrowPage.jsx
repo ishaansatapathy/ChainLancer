@@ -106,7 +106,7 @@ export default function FundEscrowPage() {
 
         // 3. Native Cryptographic Personal Sign (EIP-191) for allowance authorization
         const authMessage = [
-          '⚡ ChainLancer Escrow Protocol (Polygon Amoy Testnet)',
+          'ChainLancer Escrow Protocol (Polygon Amoy Testnet)',
           '',
           'ACTION: Authorize USDC Smart Escrow Allowance',
           `CONTRACT: ${data?.contract?.title || 'Milestone Escrow'}`,
@@ -154,7 +154,7 @@ export default function FundEscrowPage() {
 
         // Native Cryptographic Deposit Sign
         const depositMessage = [
-          '🔒 ChainLancer Escrow Deposit & Fund Lock',
+          'ChainLancer Escrow Deposit & Fund Lock',
           '',
           'ACTION: Lock USDC into Non-Custodial Smart Escrow',
           `AGREEMENT ID: ${id}`,
@@ -215,18 +215,18 @@ export default function FundEscrowPage() {
         flexWrap: 'wrap',
         gap: 12,
         padding: '12px 18px',
-        background: 'rgba(56, 189, 248, 0.08)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
+        background: 'rgba(201, 168, 76, 0.05)',
+        border: '1px solid rgba(201, 168, 76, 0.2)',
         borderRadius: 10,
         marginBottom: 20
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'inline-block', boxShadow: '0 0 8px #4ade80' }} />
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent-gold)', display: 'inline-block', boxShadow: '0 0 8px rgba(201, 168, 76, 0.5)' }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
             Polygon Amoy Testnet (Chain ID 80002)
           </span>
           {liveAmoyBlock ? (
-            <span style={{ fontSize: 12, color: 'var(--accent-cyan)', background: 'rgba(0,0,0,0.3)', padding: '2px 8px', borderRadius: 4 }}>
+            <span style={{ fontSize: 12, color: 'var(--accent-gold)', background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201, 168, 76, 0.25)', padding: '2px 8px', borderRadius: 4 }}>
               Block #{liveAmoyBlock.toLocaleString()}
             </span>
           ) : null}
@@ -258,7 +258,7 @@ export default function FundEscrowPage() {
               {connectedWallet || data.walletAddress || user.walletAddress || 'MetaMask Not Connected'}
             </p>
             {walletBalance ? (
-              <span style={{ fontSize: 11, color: '#4ade80' }}>Balance: {walletBalance}</span>
+              <span style={{ fontSize: 11, color: 'var(--accent-gold)' }}>Balance: {walletBalance}</span>
             ) : null}
           </div>
         </div>
@@ -271,14 +271,14 @@ export default function FundEscrowPage() {
 
         {/* ── Signature / Approval Proof ── */}
         {approveSig ? (
-          <div style={{ marginTop: 12, padding: '12px 16px', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.35)', borderRadius: 8 }}>
+          <div style={{ marginTop: 12, padding: '12px 16px', background: 'rgba(201, 168, 76, 0.08)', border: '1px solid rgba(201, 168, 76, 0.25)', borderRadius: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-              <span style={{ color: '#4ade80', fontSize: 13, fontWeight: 600 }}>✓ Step 1: USDC Allowance Authorized via MetaMask</span>
-              <span style={{ fontSize: 11, color: '#86efac', background: 'rgba(34, 197, 94, 0.2)', padding: '2px 6px', borderRadius: 4 }}>
+              <span style={{ color: 'var(--accent-gold)', fontSize: 13, fontWeight: 600 }}>✓ Step 1: USDC Allowance Authorized via MetaMask</span>
+              <span style={{ fontSize: 11, color: 'var(--accent-gold)', background: 'rgba(201, 168, 76, 0.15)', padding: '2px 6px', borderRadius: 4 }}>
                 secp256k1 Cryptographic Proof
               </span>
             </div>
-            <p style={{ margin: '4px 0 0', fontSize: 11, fontFamily: 'monospace', color: '#a7f3d0', wordBreak: 'break-all' }}>
+            <p style={{ margin: '4px 0 0', fontSize: 11, fontFamily: 'monospace', color: '#cbd5e1', wordBreak: 'break-all' }}>
               Sig: {approveSig}
             </p>
           </div>
@@ -286,21 +286,21 @@ export default function FundEscrowPage() {
 
         {/* ── Deposit / Funding Proof ── */}
         {fundTxHash ? (
-          <div style={{ marginTop: 12, padding: '12px 16px', background: 'rgba(212, 175, 55, 0.15)', border: '1px solid rgba(212, 175, 55, 0.45)', borderRadius: 8 }}>
+          <div style={{ marginTop: 12, padding: '12px 16px', background: 'rgba(201, 168, 76, 0.12)', border: '1px solid rgba(201, 168, 76, 0.35)', borderRadius: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-              <span style={{ color: '#fbbf24', fontSize: 13, fontWeight: 600 }}>✓ Step 2: Escrow Locked On-Chain!</span>
-              <span style={{ fontSize: 11, color: '#fde047', background: 'rgba(212, 175, 55, 0.25)', padding: '2px 6px', borderRadius: 4 }}>
+              <span style={{ color: 'var(--accent-gold)', fontSize: 13, fontWeight: 600 }}>✓ Step 2: Escrow Locked On-Chain!</span>
+              <span style={{ fontSize: 11, color: 'var(--accent-gold)', background: 'rgba(201, 168, 76, 0.2)', padding: '2px 6px', borderRadius: 4 }}>
                 Polygon Amoy Vault Locked
               </span>
             </div>
-            <p style={{ margin: '4px 0 6px', fontSize: 11, fontFamily: 'monospace', color: '#fef08a', wordBreak: 'break-all' }}>
+            <p style={{ margin: '4px 0 6px', fontSize: 11, fontFamily: 'monospace', color: '#cbd5e1', wordBreak: 'break-all' }}>
               Proof: {fundTxHash}
             </p>
             <a
               href={`${POLYGONSCAN_BASE_URL}/address/${ESCROW_CONTRACT_ADDRESS}`}
               target="_blank"
               rel="noreferrer"
-              style={{ fontSize: 12, color: 'var(--accent-cyan)', textDecoration: 'underline' }}
+              style={{ fontSize: 12, color: 'var(--accent-gold)', textDecoration: 'underline' }}
             >
               Verify Escrow Vault on PolygonScan Amoy Explorer →
             </a>

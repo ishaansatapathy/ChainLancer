@@ -119,7 +119,7 @@ export default function OnramperCheckoutModal({
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(2, 6, 23, 0.88)',
+      background: 'rgba(0, 0, 0, 0.85)',
       backdropFilter: 'blur(10px)',
       display: 'flex',
       alignItems: 'center',
@@ -132,11 +132,11 @@ export default function OnramperCheckoutModal({
         width: '100%',
         maxHeight: '92vh',
         overflowY: 'auto',
-        background: 'linear-gradient(180deg, #0f172a 0%, #090d16 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.35)',
+        background: 'linear-gradient(180deg, #141414 0%, #0a0a0a 100%)',
+        border: '1px solid rgba(201, 168, 76, 0.3)',
         borderRadius: 16,
         padding: '28px',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.15)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 35px rgba(201, 168, 76, 0.15)',
         position: 'relative',
         color: '#f8fafc'
       }}>
@@ -147,14 +147,17 @@ export default function OnramperCheckoutModal({
               width: 44,
               height: 44,
               borderRadius: 10,
-              background: 'linear-gradient(135deg, #0284c7, #38bdf8)',
+              background: 'linear-gradient(135deg, #c9a84c, #996515)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: 22,
-              boxShadow: '0 0 15px rgba(56, 189, 248, 0.4)'
+              fontSize: 13,
+              fontWeight: 800,
+              color: '#000',
+              letterSpacing: 1,
+              boxShadow: '0 0 15px rgba(201, 168, 76, 0.3)'
             }}>
-              ⚡
+              OR
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -164,11 +167,11 @@ export default function OnramperCheckoutModal({
                 <span style={{
                   fontSize: 10,
                   fontWeight: 700,
-                  background: 'rgba(34, 197, 94, 0.2)',
-                  color: '#4ade80',
+                  background: 'rgba(201, 168, 76, 0.15)',
+                  color: 'var(--accent-gold)',
                   padding: '2px 8px',
                   borderRadius: 20,
-                  border: '1px solid rgba(34, 197, 94, 0.4)'
+                  border: '1px solid rgba(201, 168, 76, 0.35)'
                 }}>
                   ● LIVE STAGING AGGREGATOR
                 </span>
@@ -226,15 +229,15 @@ export default function OnramperCheckoutModal({
                   textAlign: 'center',
                   padding: '6px 4px',
                   borderRadius: 6,
-                  background: isCurrent ? 'rgba(56, 189, 248, 0.15)' : isDone ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
-                  border: isCurrent ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid transparent',
+                  background: isCurrent ? 'rgba(201, 168, 76, 0.15)' : isDone ? 'rgba(201, 168, 76, 0.06)' : 'transparent',
+                  border: isCurrent ? '1px solid rgba(201, 168, 76, 0.4)' : '1px solid transparent',
                   transition: 'all 0.2s'
                 }}
               >
                 <div style={{
                   fontSize: 11,
                   fontWeight: 700,
-                  color: isCurrent ? 'var(--accent-cyan)' : isDone ? '#4ade80' : '#64748b'
+                  color: isCurrent ? 'var(--accent-gold)' : isDone ? '#e5b869' : '#64748b'
                 }}>
                   {isDone ? '✓' : s.num}. {s.title}
                 </div>
@@ -252,14 +255,14 @@ export default function OnramperCheckoutModal({
               justifyContent: 'space-between',
               alignItems: 'center',
               padding: '12px 16px',
-              background: 'rgba(56, 189, 248, 0.08)',
-              border: '1px solid rgba(56, 189, 248, 0.2)',
+              background: 'rgba(201, 168, 76, 0.05)',
+              border: '1px solid rgba(201, 168, 76, 0.2)',
               borderRadius: 10,
               marginBottom: 18
             }}>
               <div>
                 <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase' }}>Off-Ramping USDC</span>
-                <p style={{ margin: '2px 0 0', fontSize: 18, fontWeight: 700, color: '#e0f2fe' }}>
+                <p style={{ margin: '2px 0 0', fontSize: 18, fontWeight: 700, color: '#f8fafc' }}>
                   {fmtMoney(amountUsdc)} USDC
                 </p>
               </div>
@@ -271,7 +274,7 @@ export default function OnramperCheckoutModal({
               </div>
               <div style={{ textAlign: 'right' }}>
                 <span style={{ fontSize: 11, color: '#94a3b8', textTransform: 'uppercase' }}>Target Currency</span>
-                <p style={{ margin: '2px 0 0', fontSize: 18, fontWeight: 700, color: '#86efac' }}>
+                <p style={{ margin: '2px 0 0', fontSize: 18, fontWeight: 700, color: 'var(--accent-gold)' }}>
                   {preferredFiat} ({fiatSymbol})
                 </p>
               </div>
@@ -294,8 +297,8 @@ export default function OnramperCheckoutModal({
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       padding: '14px 16px',
-                      background: isSelected ? 'rgba(56, 189, 248, 0.12)' : 'rgba(255, 255, 255, 0.03)',
-                      border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
+                      background: isSelected ? 'rgba(201, 168, 76, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                      border: isSelected ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.08)',
                       borderRadius: 10,
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
@@ -306,21 +309,23 @@ export default function OnramperCheckoutModal({
                         width: 36,
                         height: 36,
                         borderRadius: 8,
-                        background: 'rgba(255, 255, 255, 0.06)',
+                        background: 'rgba(201, 168, 76, 0.12)',
+                        border: '1px solid rgba(201, 168, 76, 0.25)',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 18
+                        justifyContent: 'center'
                       }}>
-                        {q.ramp === 'transak' ? '⚡' : q.ramp === 'sardine' ? '🐟' : q.ramp === 'banxa' ? '🏛️' : '🌙'}
+                        <span style={{ fontSize: 11, fontWeight: 800, color: 'var(--accent-gold)' }}>
+                          {q.rampName.slice(0, 2).toUpperCase()}
+                        </span>
                       </div>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <strong style={{ fontSize: 14, color: isSelected ? '#38bdf8' : '#f8fafc' }}>
+                          <strong style={{ fontSize: 14, color: isSelected ? 'var(--accent-gold)' : '#f8fafc' }}>
                             {q.rampName}
                           </strong>
                           {idx === 0 ? (
-                            <span style={{ fontSize: 10, background: 'rgba(234, 179, 8, 0.2)', color: 'var(--accent-gold)', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
+                            <span style={{ fontSize: 10, background: 'rgba(201, 168, 76, 0.15)', color: 'var(--accent-gold)', border: '1px solid rgba(201, 168, 76, 0.3)', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
                               BEST NET PAYOUT
                             </span>
                           ) : null}
@@ -332,7 +337,7 @@ export default function OnramperCheckoutModal({
                     </div>
 
                     <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: 17, fontWeight: 700, color: '#86efac' }}>
+                      <span style={{ fontSize: 17, fontWeight: 700, color: 'var(--accent-gold)' }}>
                         {fiatSymbol}{q.fiatAmount.toLocaleString()}
                       </span>
                       <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>
@@ -355,7 +360,7 @@ export default function OnramperCheckoutModal({
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                 <span style={{ color: '#94a3b8' }}>Network Gas Fee (Polygon Amoy):</span>
-                <span style={{ color: '#86efac' }}>FREE (Subsidized by Protocol)</span>
+                <span style={{ color: 'var(--accent-gold)' }}>FREE (Subsidized by Protocol)</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                 <span style={{ color: '#94a3b8' }}>{currentQuote.rampName} Processing Fee:</span>
@@ -363,13 +368,13 @@ export default function OnramperCheckoutModal({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                 <span style={{ color: '#94a3b8' }}>KYC Compliance Requirement:</span>
-                <span style={{ color: currentQuote.kycRequired === 'none' ? '#86efac' : 'var(--accent-gold)' }}>
+                <span style={{ color: 'var(--accent-gold)' }}>
                   {currentQuote.kycRequired === 'none' ? 'Zero KYC (Instant Payout)' : 'Basic KYC (Automated Match)'}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: 8, marginTop: 8 }}>
                 <strong style={{ color: '#f8fafc' }}>Guaranteed Recipient Amount:</strong>
-                <strong style={{ fontSize: 15, color: '#86efac' }}>
+                <strong style={{ fontSize: 15, color: 'var(--accent-gold)' }}>
                   {fiatSymbol}{currentQuote.fiatAmount.toLocaleString()} {preferredFiat}
                 </strong>
               </div>
@@ -380,7 +385,7 @@ export default function OnramperCheckoutModal({
               <button
                 type="button"
                 className="app-btn app-btn--primary"
-                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #0284c7, #38bdf8)' }}
+                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #c9a84c, #996515)', color: '#000', fontWeight: 700 }}
                 onClick={() => setPayoutStep('beneficiary')}
               >
                 Continue to Recipient Payout Details →
@@ -403,21 +408,21 @@ export default function OnramperCheckoutModal({
           <div>
             <div style={{
               padding: '14px 16px',
-              background: 'rgba(56, 189, 248, 0.08)',
+              background: 'rgba(201, 168, 76, 0.06)',
               borderRadius: 10,
-              border: '1px solid rgba(56, 189, 248, 0.25)',
+              border: '1px solid rgba(201, 168, 76, 0.25)',
               marginBottom: 20
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <span style={{ fontSize: 11, color: '#94a3b8' }}>Selected Route</span>
-                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: '#38bdf8', fontSize: 15 }}>
+                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: 'var(--accent-gold)', fontSize: 15 }}>
                     {currentQuote.rampName} · {currentQuote.paymentMethodName}
                   </p>
                 </div>
                 <div style={{ textAlign: 'right' }}>
                   <span style={{ fontSize: 11, color: '#94a3b8' }}>Net Disbursal</span>
-                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: '#86efac', fontSize: 16 }}>
+                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: 'var(--accent-gold)', fontSize: 16 }}>
                     {fiatSymbol}{currentQuote.fiatAmount.toLocaleString()}
                   </p>
                 </div>
@@ -461,7 +466,7 @@ export default function OnramperCheckoutModal({
                         borderRadius: 8,
                         background: 'rgba(0, 0, 0, 0.4)',
                         border: '1px solid rgba(255, 255, 255, 0.12)',
-                        color: '#38bdf8',
+                        color: 'var(--accent-gold)',
                         fontSize: 13,
                         fontWeight: 600
                       }}
@@ -535,17 +540,17 @@ export default function OnramperCheckoutModal({
               <button
                 type="button"
                 className="app-btn app-btn--primary"
-                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #10b981, #059669)' }}
+                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #c9a84c, #996515)', color: '#000', fontWeight: 700 }}
                 onClick={handleStartDispatch}
               >
-                Authorize Off-Ramp Disbursement ⚡
+                Authorize Off-Ramp Disbursement
               </button>
               <button
                 type="button"
                 className="app-btn app-btn--ghost"
                 onClick={() => setPayoutStep('quote')}
               >
-                ← Back
+                Back
               </button>
             </div>
           </div>
@@ -559,53 +564,30 @@ export default function OnramperCheckoutModal({
               height: 56,
               margin: '0 auto 20px',
               borderRadius: '50%',
-              border: '3px solid rgba(56, 189, 248, 0.2)',
-              borderTopColor: '#38bdf8',
-              animation: 'spin 1s linear infinite'
+              border: '3px solid rgba(201, 168, 76, 0.2)',
+              borderTopColor: 'var(--accent-gold)',
+              animation: 'spin 0.9s linear infinite'
             }} />
-            <h3 style={{ fontSize: 18, marginBottom: 8, color: '#f8fafc' }}>
-              Dispatching Settlement Pipeline
+            <h3 style={{ margin: '0 0 8px', fontSize: 18, color: '#f8fafc' }}>
+              Orchestrating {currentQuote.rampName} Settlement...
             </h3>
-            <p style={{ fontSize: 13, color: '#94a3b8', maxWidth: 440, margin: '0 auto 24px' }}>
-              Communicating with Onramper API & Banking partner for instant fiat credit...
+            <p style={{ margin: '0 0 20px', fontSize: 13, color: '#94a3b8' }}>
+              Liquidating {amountUsdc} USDC to {fiatSymbol}{currentQuote.fiatAmount.toLocaleString()} {preferredFiat} via domestic banking rail.
             </p>
 
-            {/* Stages */}
             <div style={{
-              maxWidth: 480,
+              maxWidth: 380,
               margin: '0 auto',
-              background: 'rgba(0, 0, 0, 0.4)',
-              borderRadius: 12,
-              padding: '16px',
+              background: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: 8,
+              padding: '12px 16px',
               border: '1px solid rgba(255, 255, 255, 0.08)',
-              textAlign: 'left',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 12,
-              fontSize: 12
+              fontSize: 12,
+              textAlign: 'left'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span>{dispatchStage >= 1 ? '✅' : '⏳'}</span>
-                <div>
-                  <strong>Polygon Amoy Escrow Authorization</strong>
-                  <div style={{ color: '#94a3b8', fontSize: 11 }}>ChainLancerEscrow SafeERC20 release verified</div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span>{dispatchStage >= 2 ? '✅' : '⏳'}</span>
-                <div>
-                  <strong>{currentQuote.rampName} Webhook Handshake</strong>
-                  <div style={{ color: '#94a3b8', fontSize: 11 }}>Order locked: ORDER_STATUS: PROCESSING_DISPATCH</div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span>{dispatchStage >= 3 ? '✅' : '⏳'}</span>
-                <div>
-                  <strong>Banking Rail Dispatched ({currentQuote.paymentMethodName})</strong>
-                  <div style={{ color: '#94a3b8', fontSize: 11 }}>Transmitting IMPS / UPI payout to {beneficiaryUpi}</div>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent-gold)' }}>
+                <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-gold)' }} />
+                <span>Simulating webhook dispatch: <code>payment.authorized</code></span>
               </div>
             </div>
           </div>
@@ -619,19 +601,19 @@ export default function OnramperCheckoutModal({
                 width: 52,
                 height: 52,
                 borderRadius: '50%',
-                background: 'rgba(34, 197, 94, 0.2)',
-                border: '2px solid #4ade80',
+                background: 'rgba(201, 168, 76, 0.15)',
+                border: '2px solid var(--accent-gold)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: 26,
+                fontSize: 22,
                 margin: '0 auto 12px',
-                color: '#4ade80'
+                color: 'var(--accent-gold)'
               }}>
                 ✓
               </div>
               <h3 style={{ margin: '0 0 6px', fontSize: 20, color: '#f8fafc' }}>
-                Fiat Settlement Dispatched!
+                Fiat Settlement Dispatched
               </h3>
               <p style={{ margin: 0, fontSize: 13, color: '#94a3b8' }}>
                 Funds routed via {currentQuote.rampName} with real Onramper staging specifications.
@@ -643,19 +625,19 @@ export default function OnramperCheckoutModal({
               background: 'rgba(0, 0, 0, 0.4)',
               borderRadius: 12,
               padding: '18px 20px',
-              border: '1px solid rgba(34, 197, 94, 0.3)',
+              border: '1px solid rgba(201, 168, 76, 0.25)',
               marginBottom: 20
             }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, fontSize: 12 }}>
                 <div>
                   <span style={{ color: '#64748b' }}>Bank UTR / Ref Number</span>
-                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace' }}>
+                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: 'var(--accent-gold)', fontFamily: 'monospace' }}>
                     {utrNumber}
                   </p>
                 </div>
                 <div>
                   <span style={{ color: '#64748b' }}>Disbursed Amount</span>
-                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: '#86efac', fontSize: 15 }}>
+                  <p style={{ margin: '2px 0 0', fontWeight: 700, color: 'var(--accent-gold)', fontSize: 15 }}>
                     {fiatSymbol}{currentQuote.fiatAmount.toLocaleString()} {preferredFiat}
                   </p>
                 </div>
@@ -678,10 +660,10 @@ export default function OnramperCheckoutModal({
               <button
                 type="button"
                 className="app-btn app-btn--primary"
-                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #10b981, #059669)' }}
+                style={{ flex: 1, padding: '12px 18px', background: 'linear-gradient(135deg, #c9a84c, #996515)', color: '#000', fontWeight: 700 }}
                 onClick={handleCompleteSettlement}
               >
-                Confirm Settlement in Contract Ledger ✓
+                Confirm Settlement in Contract Ledger
               </button>
               <button
                 type="button"

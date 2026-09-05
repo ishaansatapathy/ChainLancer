@@ -54,7 +54,7 @@ export default function WalletPage() {
         <div className="status-grid wallet-grid">
           <div className="status-pill"><span>Address</span><strong>{w.addressDisplay}</strong></div>
           <div className="status-pill"><span>Network</span><strong>{w.networkDisplay}</strong></div>
-          <div className="status-pill"><span>USDC Balance</span><strong style={{ color: '#86efac' }}>{w.onAmoy && w.connected ? w.usdcBalance : '—'}</strong></div>
+          <div className="status-pill"><span>USDC Balance</span><strong style={{ color: 'var(--accent-gold)' }}>{w.onAmoy && w.connected ? w.usdcBalance : '—'}</strong></div>
           <div className="status-pill"><span>Gas (POL)</span><strong>{w.onAmoy && w.connected ? w.balance : w.connected && !w.onAmoy ? 'Switch to Amoy' : '—'}</strong></div>
         </div>
         <div className="wallet-actions">
@@ -63,28 +63,28 @@ export default function WalletPage() {
               <button
                 type="button"
                 className="auth-google"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(59, 130, 246, 0.15)', borderColor: 'rgba(59, 130, 246, 0.4)', color: '#93c5fd' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(201, 168, 76, 0.08)', borderColor: 'rgba(201, 168, 76, 0.3)', color: 'var(--accent-gold)' }}
                 onClick={w.addUsdcToMetaMask}
                 title="Imports the USDC contract into MetaMask so your balance is visible"
               >
-                🦊 Import USDC Token in MetaMask (Show in List)
+                Import USDC Token in MetaMask
               </button>
               <a
                 href="https://faucet.circle.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="auth-google"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(217, 119, 6, 0.15)', borderColor: 'rgba(217, 119, 6, 0.4)', color: '#fbbf24', textDecoration: 'none' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(255, 255, 255, 0.04)', borderColor: 'rgba(255, 255, 255, 0.12)', color: 'var(--text-secondary)', textDecoration: 'none' }}
               >
-                🚰 Get Free Testnet USDC (Circle Official Faucet)
+                Get Free Testnet USDC (Circle Official Faucet)
               </a>
               <button
                 type="button"
                 className="auth-google"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'rgba(16, 185, 129, 0.15)', borderColor: 'rgba(16, 185, 129, 0.4)', color: '#86efac' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'linear-gradient(135deg, #c9a84c, #996515)', borderColor: 'transparent', color: '#000', fontWeight: 700 }}
                 onClick={() => setShowOnramper(true)}
               >
-                ⚡ Cash Out USDC to Bank (Onramper UPI / IMPS)
+                Cash Out USDC to Bank (Onramper UPI / IMPS)
               </button>
             </>
           ) : null}

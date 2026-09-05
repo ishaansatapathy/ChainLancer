@@ -100,7 +100,7 @@ export default function CreateContractPage() {
               </div>
             ))}
             <button type="button" className="app-btn app-btn--ghost" onClick={() => setMilestones([...milestones, emptyMs()])}>Add Milestone</button>
-            <p className="app-note" style={{ color: match ? '#86efac' : '#fca5a5' }}>
+            <p className="app-note" style={{ color: match ? 'var(--accent-gold)' : '#f43f5e', fontWeight: 500 }}>
               Milestone total: {fmtMoney(sum)} — {match ? 'matches contract total' : 'must equal contract total'}
             </p>
           </div>
