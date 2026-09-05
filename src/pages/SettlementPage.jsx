@@ -231,7 +231,7 @@ export default function SettlementPage() {
                   {connectedWallet || '0x9Bc8a01E...3028e'}
                 </div>
                 <div style={{ fontSize: 13, color: '#ef4444', fontWeight: 700 }}>
-                  - {fmtMoney(s.netUsdc)} USDC (Escrow Funded)
+                  - {fmtMoney(s.netUsdc)} (Escrow Funded)
                 </div>
               </div>
 
@@ -269,59 +269,84 @@ export default function SettlementPage() {
                   {isAmoy ? (user.walletAddress || '0x040520a...e5877') : `Bank Beneficiary: ${user.fullName || 'Ishaan Satapathy'} (UPI)`}
                 </div>
                 <div style={{ fontSize: 13, color: '#86efac', fontWeight: 700 }}>
-                  + {isAmoy ? `${fmtMoney(s.netUsdc)} USDC (Released to Wallet!)` : `${s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR (Dispatched to Bank!)`}
+                  + {isAmoy ? `${fmtMoney(s.netUsdc)} (Released to Wallet!)` : `${s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR (Dispatched to Bank!)`}
                 </div>
               </div>
             </div>
           </div>
 
-          {s.txHash ? (
-            <div style={{ padding: '16px', background: isAmoy ? 'rgba(56,189,248,0.08)' : 'rgba(34,197,94,0.08)', borderRadius: 10, border: `1px solid ${isAmoy ? 'rgba(56,189,248,0.3)' : 'rgba(34,197,94,0.3)'}`, marginBottom: 20 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                <span style={{ fontSize: 12, color: isAmoy ? 'var(--accent-cyan)' : '#86efac', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                  {isAmoy ? 'Polygon Amoy On-Chain Proof (Tx Hash):' : 'Domestic Banking Rail Payout Proof (Bank UTR):'}
-                </span>
-                <span style={{ fontSize: 11, color: isAmoy ? '#38bdf8' : '#86efac', background: isAmoy ? 'rgba(56,189,248,0.15)' : 'rgba(34,197,94,0.15)', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>
-                  {isAmoy ? 'Verified On-Chain' : 'Bank Reference Confirmed'}
-                </span>
-              </div>
+          {s.txHash ? (() => {
+            const isSig = isAmoy && typeof s.txHash === 'string' && s.txHash.length > 66;
+            const isRealTx = isAmoy && typeof s.txHash === 'string' && s.txHash.length === 66;
 
-              <p style={{ margin: '4px 0 10px', fontFamily: 'monospace', fontSize: 13, wordBreak: 'break-all', color: '#f8fafc', fontWeight: 600 }}>
-                {s.txHash}
-              </p>
-
-              {!isAmoy ? (
-                <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.35)', borderRadius: 6, marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
-                  <strong style={{ color: 'var(--accent-gold)' }}>💡 Fiat Off-Ramp Explanation:</strong>
-                  <p style={{ margin: '4px 0 0' }}>
-                    Aapne <strong>{s.provider || 'Onramper'} (Fiat Rail)</strong> select kiya tha. Smart escrow se ${fmtMoney(s.netUsdc)} USDC liquidate hokar direct aapke domestic bank account me <strong>{s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR</strong> bhej diya gaya hai (Bank UTR: <code>{s.txHash}</code>). 
-                    Ye paisa bank account me aaya hai, isliye PolygonScan par token transfer nahi dikhega. Agar aap raw USDC token apne MetaMask wallet me chahte hain, toh next time <strong>"⚡ Direct USDC Release (Polygon Amoy)"</strong> select karein.
-                  </p>
+            return (
+              <div style={{ padding: '16px', background: isAmoy ? 'rgba(56,189,248,0.08)' : 'rgba(34,197,94,0.08)', borderRadius: 10, border: `1px solid ${isAmoy ? 'rgba(56,189,248,0.3)' : 'rgba(34,197,94,0.3)'}`, marginBottom: 20 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                  <span style={{ fontSize: 12, color: isAmoy ? 'var(--accent-cyan)' : '#86efac', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                    {isSig
+                      ? 'MetaMask Cryptographic Release Authorization (EIP-191 Signature):'
+                      : isRealTx
+                      ? 'Polygon Amoy On-Chain Proof (Tx Hash):'
+                      : 'Domestic Banking Rail Payout Proof (Bank UTR):'}
+                  </span>
+                  <span style={{
+                    fontSize: 11,
+                    color: isSig ? '#a78bfa' : isRealTx ? '#38bdf8' : '#86efac',
+                    background: isSig ? 'rgba(167,139,250,0.15)' : isRealTx ? 'rgba(56,189,248,0.15)' : 'rgba(34,197,94,0.15)',
+                    padding: '2px 8px',
+                    borderRadius: 4,
+                    fontWeight: 600
+                  }}>
+                    {isSig ? 'Cryptographically Signed' : isRealTx ? 'Verified On-Chain' : 'Bank Reference Confirmed'}
+                  </span>
                 </div>
-              ) : null}
 
-              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-                {isAmoy && typeof s.txHash === 'string' && s.txHash.length === 66 && !s.txHash.includes('simulated') ? (
+                <p style={{ margin: '4px 0 10px', fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all', color: '#f8fafc', fontWeight: 600 }}>
+                  {s.txHash}
+                </p>
+
+                {isSig ? (
+                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.35)', borderRadius: 6, marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
+                    <strong style={{ color: '#a78bfa' }}>💡 Cryptographic Signature vs On-Chain Transfer:</strong>
+                    <p style={{ margin: '4px 0 0' }}>
+                      Ye hash ek <strong>EIP-191 Cryptographic Signature</strong> hai jo client ke self-custody MetaMask wallet se digitally sign kiya gaya hai.
+                      Kyunki testnet wallet me gas (POL) zero hota hai, ye protocol <strong>gasless authorization</strong> use karta hai taaki client bina gas fee diye release authorize kar sake. 
+                      Is message ke liye Polygon blockchain par gas fee nahi lagi aur tokens on-chain ledger me broadcast nahi huye — PolygonScan sirf on-chain transactions track karta hai, isliye wahan wahi <strong>20 USDC</strong> faucet balance dikhta hai jo pehle se funded tha.
+                    </p>
+                  </div>
+                ) : !isAmoy ? (
+                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.35)', borderRadius: 6, marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
+                    <strong style={{ color: 'var(--accent-gold)' }}>💡 Fiat Off-Ramp Explanation:</strong>
+                    <p style={{ margin: '4px 0 0' }}>
+                      Aapne <strong>{s.provider || 'Onramper'} (Fiat Rail)</strong> select kiya tha. Smart escrow se ${fmtMoney(s.netUsdc)} USDC liquidate hokar direct aapke domestic bank account me <strong>{s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR</strong> bhej diya gaya hai (Bank UTR: <code>{s.txHash}</code>). 
+                      Ye paisa bank account me aaya hai, isliye PolygonScan par token transfer nahi dikhega.
+                    </p>
+                  </div>
+                ) : null}
+
+                <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                  {isRealTx && !s.txHash.includes('simulated') ? (
+                    <a
+                      href={`${POLYGONSCAN_BASE_URL}/tx/${s.txHash}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ fontSize: 12, color: 'var(--accent-cyan)', textDecoration: 'underline', fontWeight: 600 }}
+                    >
+                      View Tx on PolygonScan Amoy Explorer →
+                    </a>
+                  ) : null}
                   <a
-                    href={`${POLYGONSCAN_BASE_URL}/tx/${s.txHash}`}
+                    href={`${POLYGONSCAN_BASE_URL}/token/0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582?a=${user.walletAddress || connectedWallet || ''}`}
                     target="_blank"
                     rel="noreferrer"
-                    style={{ fontSize: 12, color: 'var(--accent-cyan)', textDecoration: 'underline', fontWeight: 600 }}
+                    style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'underline' }}
                   >
-                    View Tx on PolygonScan Amoy Explorer →
+                    View Base MetaMask Wallet Ledger on PolygonScan (20 USDC) →
                   </a>
-                ) : null}
-                <a
-                  href={`${POLYGONSCAN_BASE_URL}/token/0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582?a=${user.walletAddress || connectedWallet || ''}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'underline' }}
-                >
-                  View Base MetaMask Wallet Ledger on PolygonScan (20 USDC) →
-                </a>
+                </div>
               </div>
-            </div>
-          ) : (
+            );
+          })() : (
             <p className="app-note app-note--sim" style={{ marginBottom: 20 }}>
               Settlement completed. Rail payout dispatched with real Onramper staging parameters.
             </p>
