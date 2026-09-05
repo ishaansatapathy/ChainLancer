@@ -828,7 +828,7 @@ export default function SettlementPage() {
                       fontSize: 11,
                       color: 'var(--text-muted)'
                     }}>
-                      <span>ETA: ~{q.settlementMinutes}m</span>
+                      <span>Estimated Settlement: ~{q.settlementMinutes}m</span>
                       <span>Fee: ${q.totalFee}</span>
                     </div>
                   </div>
@@ -886,7 +886,7 @@ export default function SettlementPage() {
                           ) : null}
                         </div>
                         <p style={{ margin: 0, fontSize: 12, color: 'var(--text-muted)' }}>
-                          Channel: {r.channel} · ETA: ~{r.settlementMinutes}m
+                          Channel: {r.channel} · Estimated Settlement: ~{r.settlementMinutes}m
                         </p>
                       </div>
 
