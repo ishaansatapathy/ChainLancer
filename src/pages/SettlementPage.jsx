@@ -19,6 +19,15 @@ export default function SettlementPage() {
   const [executing, setExecuting] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showOnramperModal, setShowOnramperModal] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState(user?.walletAddress || '');
+
+  useEffect(() => {
+    if (window.ethereum?.selectedAddress) {
+      setConnectedWallet(window.ethereum.selectedAddress);
+    } else if (user?.walletAddress) {
+      setConnectedWallet(user.walletAddress);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!user) return;
