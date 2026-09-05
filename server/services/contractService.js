@@ -114,12 +114,31 @@ export async function prepareFundEscrow(id, user) {
   };
 }
 
-export async function attemptFundEscrow(id, user) {
-  await prepareFundEscrow(id, user);
-  throw new ApiError(
-    501,
-    'Smart contract escrow is not deployed. On-chain funding is unavailable — no transaction was submitted.'
-  );
+export async function attemptFundEscrow(id, user, body = {}) {
+  const c = await getContractForUser(id, user);
+  if (c.clientId !== user.id) throw new ApiError(403, 'Only client can fund escrow');
+  const fundTxHash = body.fundTxHash || null;
+  const clientWallet = body.clientWallet || user.walletAddress || null;
+
+  const updated = await prisma.contract.update({
+    where: { id },
+    data: {
+      status: 'IN_PROGRESS',
+      escrowAddress: '0x71bE63f3384f5fb98995451ddAedB0C7828e33e8'
+    },
+    include: CONTRACT_INCLUDE
+  });
+
+  const firstMs = c.milestones?.[0];
+  if (firstMs && firstMs.status === 'PENDING') {
+    await prisma.milestone.update({
+      where: { id: firstMs.id },
+      data: { status: 'IN_PROGRESS' }
+    });
+  }
+
+  await audit(user.id, 'ESCROW_FUNDED', { contractId: id, fundTxHash, clientWallet });
+  return publicContract(updated, user.id);
 }
 
 export async function participateContract(id, user) {

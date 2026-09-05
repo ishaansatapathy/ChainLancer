@@ -83,8 +83,8 @@ export async function handleAppRoutes(req, res, url) {
 
       if (req.method === 'POST' && sub === '/fund') {
         const user = await requireAuth(req);
-        await attemptFundEscrow(id, user);
-        return false;
+        const body = await readJsonBody(req);
+        return sendJson(res, 200, { contract: await attemptFundEscrow(id, user, body) });
       }
 
       if (req.method === 'POST' && sub === '/participate') {
