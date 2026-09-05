@@ -114,7 +114,7 @@ export default function SettlementPage() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const signer = accounts[0];
         const releaseMsg = [
-          '⚡ ChainLancer On-Chain Settlement Release',
+          'ChainLancer On-Chain Settlement Release',
           '',
           'ACTION: Authorize Direct USDC Release on Polygon Amoy',
           `CONTRACT: ${contractId}`,
@@ -167,11 +167,11 @@ export default function SettlementPage() {
           </p>
         </div>
 
-        <div className="app-card" style={{ borderColor: 'rgba(134,239,172,0.3)' }}>
+        <div className="app-card" style={{ borderColor: 'rgba(201, 168, 76, 0.3)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-            <span style={{ fontSize: 24, color: '#86efac' }}>✓</span>
+            <span style={{ fontSize: 20, color: 'var(--accent-gold)' }}>✓</span>
             <div>
-              <strong style={{ fontSize: 16, color: '#86efac' }}>
+              <strong style={{ fontSize: 16, color: 'var(--accent-gold)' }}>
                 {isAmoy ? 'On-Chain USDC Release Confirmed' : `${s.fiatSymbol}${s.estimatedFiat.toLocaleString()} Settlement Executed`}
               </strong>
               <p className="app-note" style={{ margin: 0 }}>Reference: <code>{s.reference}</code></p>
@@ -179,17 +179,17 @@ export default function SettlementPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 20 }}>
-            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 8 }}>
+            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)' }}>
               <span style={{ fontSize: 11, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Released USDC</span>
               <p style={{ margin: '4px 0 0', fontSize: 18, fontWeight: 700 }}>{fmtMoney(s.netUsdc)}</p>
             </div>
-            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 8 }}>
+            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)' }}>
               <span style={{ fontSize: 11, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Estimated Net Payout</span>
               <p style={{ margin: '4px 0 0', fontSize: 18, fontWeight: 700, color: 'var(--accent-gold)' }}>
                 {s.fiatSymbol}{s.estimatedFiat.toLocaleString()}
               </p>
             </div>
-            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 8 }}>
+            <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)' }}>
               <span style={{ fontSize: 11, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Settlement Rail</span>
               <p style={{ margin: '4px 0 0', fontSize: 14, fontWeight: 600 }}>{s.routeType}</p>
             </div>
@@ -198,16 +198,16 @@ export default function SettlementPage() {
           {/* Visual Settlement Flow Pipeline */}
           <div style={{
             padding: '20px',
-            background: 'linear-gradient(135deg, rgba(15,23,42,0.9), rgba(2,6,23,0.95))',
+            background: 'linear-gradient(135deg, rgba(18,18,18,0.95), rgba(10,10,10,0.98))',
             borderRadius: 12,
-            border: '1px solid rgba(56,189,248,0.25)',
+            border: '1px solid rgba(201, 168, 76, 0.25)',
             marginBottom: 20
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: 1 }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: 1 }}>
                 Live On-Chain Settlement Pipeline
               </span>
-              <span style={{ fontSize: 11, color: '#86efac', background: 'rgba(34,197,94,0.15)', padding: '3px 10px', borderRadius: 20, fontWeight: 600 }}>
+              <span style={{ fontSize: 11, color: 'var(--accent-gold)', background: 'rgba(201, 168, 76, 0.12)', border: '1px solid rgba(201, 168, 76, 0.25)', padding: '3px 10px', borderRadius: 20, fontWeight: 600 }}>
                 ● Real-Time Blockchain Settlement
               </span>
             </div>
@@ -221,43 +221,43 @@ export default function SettlementPage() {
               {/* Node 1: Client Wallet */}
               <div style={{ padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                  <span style={{ fontSize: 22 }}>🏢</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 6px', borderRadius: 4, background: 'rgba(255,255,255,0.08)', color: 'var(--text-muted)' }}>ORIGIN</span>
                   <div>
-                    <strong style={{ fontSize: 13, color: '#e2e8f0' }}>Client Wallet (Origin)</strong>
+                    <strong style={{ fontSize: 13, color: '#e2e8f0' }}>Client Wallet</strong>
                     <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>Account 1 · USA / Global</div>
                   </div>
                 </div>
-                <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'var(--accent-cyan)', marginBottom: 8, wordBreak: 'break-all' }}>
+                <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#e5b869', marginBottom: 8, wordBreak: 'break-all' }}>
                   {connectedWallet || '0x9Bc8a01E...3028e'}
                 </div>
-                <div style={{ fontSize: 13, color: '#ef4444', fontWeight: 700 }}>
+                <div style={{ fontSize: 13, color: '#f43f5e', fontWeight: 700 }}>
                   - {fmtMoney(s.netUsdc)} (Escrow Funded)
                 </div>
               </div>
 
               {/* Node 2: Smart Contract + Qship */}
-              <div style={{ padding: '16px', background: 'rgba(56,189,248,0.05)', borderRadius: 10, border: '1px solid rgba(56,189,248,0.3)', textAlign: 'center' }}>
+              <div style={{ padding: '16px', background: 'rgba(201, 168, 76, 0.04)', borderRadius: 10, border: '1px solid rgba(201, 168, 76, 0.25)', textAlign: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: 8 }}>
-                  <span style={{ fontSize: 22 }}>🛡️</span>
-                  <strong style={{ fontSize: 13, color: '#38bdf8' }}>Smart Escrow Protocol</strong>
+                  <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 6px', borderRadius: 4, background: 'rgba(201, 168, 76, 0.15)', color: 'var(--accent-gold)' }}>ESCROW</span>
+                  <strong style={{ fontSize: 13, color: 'var(--accent-gold)' }}>Smart Escrow Protocol</strong>
                 </div>
-                <div style={{ fontSize: 12, color: '#86efac', fontWeight: 700, marginBottom: 4 }}>
+                <div style={{ fontSize: 12, color: 'var(--accent-gold)', fontWeight: 700, marginBottom: 4 }}>
                   ✓ Qship AI: 94% PASS
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 6 }}>
                   Polygon Amoy (80002)
                 </div>
-                <span style={{ fontSize: 10, background: 'rgba(56,189,248,0.15)', color: '#38bdf8', padding: '2px 8px', borderRadius: 4 }}>
+                <span style={{ fontSize: 10, background: 'rgba(201, 168, 76, 0.12)', color: 'var(--accent-gold)', border: '1px solid rgba(201, 168, 76, 0.25)', padding: '2px 8px', borderRadius: 4 }}>
                   SafeERC20 Release
                 </span>
               </div>
 
               {/* Node 3: Freelancer Wallet or Bank */}
-              <div style={{ padding: '16px', background: 'rgba(34,197,94,0.05)', borderRadius: 10, border: '1px solid rgba(34,197,94,0.3)' }}>
+              <div style={{ padding: '16px', background: 'rgba(201, 168, 76, 0.04)', borderRadius: 10, border: '1px solid rgba(201, 168, 76, 0.25)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                  <span style={{ fontSize: 22 }}>{isAmoy ? '💻' : '🏦'}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, padding: '3px 6px', borderRadius: 4, background: 'rgba(201, 168, 76, 0.15)', color: 'var(--accent-gold)' }}>{isAmoy ? 'WALLET' : 'BANK'}</span>
                   <div>
-                    <strong style={{ fontSize: 13, color: '#86efac' }}>
+                    <strong style={{ fontSize: 13, color: 'var(--accent-gold)' }}>
                       {isAmoy ? 'Freelancer Wallet (Beneficiary)' : 'Freelancer Bank Account (UPI / IMPS)'}
                     </strong>
                     <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
@@ -265,10 +265,10 @@ export default function SettlementPage() {
                     </div>
                   </div>
                 </div>
-                <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#86efac', marginBottom: 8, wordBreak: 'break-all' }}>
+                <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#e5b869', marginBottom: 8, wordBreak: 'break-all' }}>
                   {isAmoy ? (user.walletAddress || '0x040520a...e5877') : `Bank Beneficiary: ${user.fullName || 'Ishaan Satapathy'} (UPI)`}
                 </div>
-                <div style={{ fontSize: 13, color: '#86efac', fontWeight: 700 }}>
+                <div style={{ fontSize: 13, color: 'var(--accent-gold)', fontWeight: 700 }}>
                   + {isAmoy ? `${fmtMoney(s.netUsdc)} (Released to Wallet!)` : `${s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR (Dispatched to Bank!)`}
                 </div>
               </div>
@@ -280,9 +280,9 @@ export default function SettlementPage() {
             const isRealTx = isAmoy && typeof s.txHash === 'string' && s.txHash.length === 66;
 
             return (
-              <div style={{ padding: '16px', background: isAmoy ? 'rgba(56,189,248,0.08)' : 'rgba(34,197,94,0.08)', borderRadius: 10, border: `1px solid ${isAmoy ? 'rgba(56,189,248,0.3)' : 'rgba(34,197,94,0.3)'}`, marginBottom: 20 }}>
+              <div style={{ padding: '16px', background: 'rgba(201, 168, 76, 0.04)', borderRadius: 10, border: '1px solid rgba(201, 168, 76, 0.22)', marginBottom: 20 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                  <span style={{ fontSize: 12, color: isAmoy ? 'var(--accent-cyan)' : '#86efac', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                  <span style={{ fontSize: 12, color: 'var(--accent-gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5 }}>
                     {isSig
                       ? 'MetaMask Cryptographic Release Authorization (EIP-191 Signature):'
                       : isRealTx
@@ -291,8 +291,9 @@ export default function SettlementPage() {
                   </span>
                   <span style={{
                     fontSize: 11,
-                    color: isSig ? '#a78bfa' : isRealTx ? '#38bdf8' : '#86efac',
-                    background: isSig ? 'rgba(167,139,250,0.15)' : isRealTx ? 'rgba(56,189,248,0.15)' : 'rgba(34,197,94,0.15)',
+                    color: 'var(--accent-gold)',
+                    background: 'rgba(201, 168, 76, 0.12)',
+                    border: '1px solid rgba(201, 168, 76, 0.25)',
                     padding: '2px 8px',
                     borderRadius: 4,
                     fontWeight: 600
@@ -306,8 +307,8 @@ export default function SettlementPage() {
                 </p>
 
                 {isSig ? (
-                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.35)', borderRadius: 6, marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
-                    <strong style={{ color: '#a78bfa' }}>💡 Cryptographic Signature vs On-Chain Transfer:</strong>
+                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.4)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.06)', marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
+                    <strong style={{ color: 'var(--accent-gold)' }}>Notice · Cryptographic Signature vs On-Chain Transfer:</strong>
                     <p style={{ margin: '4px 0 0' }}>
                       Ye hash ek <strong>EIP-191 Cryptographic Signature</strong> hai jo client ke self-custody MetaMask wallet se digitally sign kiya gaya hai.
                       Kyunki testnet wallet me gas (POL) zero hota hai, ye protocol <strong>gasless authorization</strong> use karta hai taaki client bina gas fee diye release authorize kar sake. 
@@ -315,8 +316,8 @@ export default function SettlementPage() {
                     </p>
                   </div>
                 ) : !isAmoy ? (
-                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.35)', borderRadius: 6, marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
-                    <strong style={{ color: 'var(--accent-gold)' }}>💡 Fiat Off-Ramp Explanation:</strong>
+                  <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.4)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.06)', marginBottom: 12, fontSize: 12, color: '#cbd5e1', lineHeight: 1.5 }}>
+                    <strong style={{ color: 'var(--accent-gold)' }}>Notice · Fiat Off-Ramp Explanation:</strong>
                     <p style={{ margin: '4px 0 0' }}>
                       Aapne <strong>{s.provider || 'Onramper'} (Fiat Rail)</strong> select kiya tha. Smart escrow se ${fmtMoney(s.netUsdc)} USDC liquidate hokar direct aapke domestic bank account me <strong>{s.fiatSymbol || '₹'}${s.estimatedFiat?.toLocaleString()} INR</strong> bhej diya gaya hai (Bank UTR: <code>{s.txHash}</code>). 
                       Ye paisa bank account me aaya hai, isliye PolygonScan par token transfer nahi dikhega.
@@ -330,7 +331,7 @@ export default function SettlementPage() {
                       href={`${POLYGONSCAN_BASE_URL}/tx/${s.txHash}`}
                       target="_blank"
                       rel="noreferrer"
-                      style={{ fontSize: 12, color: 'var(--accent-cyan)', textDecoration: 'underline', fontWeight: 600 }}
+                      style={{ fontSize: 12, color: 'var(--accent-gold)', textDecoration: 'underline', fontWeight: 600 }}
                     >
                       View Tx on PolygonScan Amoy Explorer →
                     </a>
@@ -356,10 +357,10 @@ export default function SettlementPage() {
             <button
               type="button"
               className="app-btn app-btn--primary"
-              style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #10b981, #059669)' }}
+              style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #c9a84c, #996515)', color: '#000', fontWeight: 700 }}
               onClick={() => setShowCertificate(true)}
             >
-              📜 View Official Settlement Certificate
+              View Official Settlement Certificate
             </button>
             <Link to={`/contracts/${contractId}`} className="app-btn app-btn--ghost">View Contract</Link>
             <Link to="/payments" className="app-btn app-btn--ghost">View Payments History</Link>
@@ -381,11 +382,11 @@ export default function SettlementPage() {
               <div style={{
                 maxWidth: 640,
                 width: '100%',
-                background: 'linear-gradient(180deg, #0f172a 0%, #020617 100%)',
-                border: '2px solid rgba(234, 179, 8, 0.4)',
+                background: 'linear-gradient(180deg, #141414 0%, #0a0a0a 100%)',
+                border: '1px solid rgba(201, 168, 76, 0.35)',
                 borderRadius: 16,
                 padding: '32px',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(234, 179, 8, 0.15)',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 168, 76, 0.12)',
                 position: 'relative'
               }}>
                 <button
@@ -417,7 +418,7 @@ export default function SettlementPage() {
                   </p>
                 </div>
 
-                <div style={{ background: 'rgba(0,0,0,0.4)', borderRadius: 10, padding: '16px 20px', border: '1px solid rgba(255,255,255,0.06)', marginBottom: 20 }}>
+                <div style={{ background: 'rgba(0,0,0,0.5)', borderRadius: 10, padding: '16px 20px', border: '1px solid rgba(255,255,255,0.06)', marginBottom: 20 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, fontSize: 12 }}>
                     <div>
                       <span style={{ color: '#64748b' }}>Certificate Ref</span>
@@ -425,7 +426,7 @@ export default function SettlementPage() {
                     </div>
                     <div>
                       <span style={{ color: '#64748b' }}>Disbursed Asset</span>
-                      <p style={{ margin: '2px 0 0', fontWeight: 700, color: '#86efac' }}>{fmtMoney(s.netUsdc)} Circle USDC</p>
+                      <p style={{ margin: '2px 0 0', fontWeight: 700, color: 'var(--accent-gold)' }}>{fmtMoney(s.netUsdc)} Circle USDC</p>
                     </div>
                     <div>
                       <span style={{ color: '#64748b' }}>Client Authority (Signer)</span>
@@ -441,7 +442,7 @@ export default function SettlementPage() {
                     </div>
                     <div>
                       <span style={{ color: '#64748b' }}>Qship Quality Gate</span>
-                      <p style={{ margin: '2px 0 0', fontWeight: 600, color: '#38bdf8' }}>✓ PASS · 94% Confidence (Commit 288383a)</p>
+                      <p style={{ margin: '2px 0 0', fontWeight: 600, color: 'var(--accent-gold)' }}>✓ PASS · 94% Confidence (Commit 288383a)</p>
                     </div>
                     <div>
                       <span style={{ color: '#64748b' }}>Settlement Substrate</span>
@@ -455,7 +456,7 @@ export default function SettlementPage() {
                     href="https://amoy.polygonscan.com/tx/0xe7452a188272cbaf4652f385a45654b460ab8c2b05750d66ac4f411e78a0798a"
                     target="_blank"
                     rel="noreferrer"
-                    style={{ fontSize: 12, color: 'var(--accent-cyan)', textDecoration: 'underline' }}
+                    style={{ fontSize: 12, color: 'var(--accent-gold)', textDecoration: 'underline' }}
                   >
                     Verify Block Explorer Proof on PolygonScan →
                   </a>
@@ -466,9 +467,9 @@ export default function SettlementPage() {
                     type="button"
                     className="app-btn app-btn--primary"
                     onClick={() => window.print()}
-                    style={{ background: 'var(--accent-gold)', color: '#000', fontWeight: 700 }}
+                    style={{ background: 'linear-gradient(135deg, #c9a84c, #996515)', color: '#000', fontWeight: 700 }}
                   >
-                    🖨️ Print / Save PDF Certificate
+                    Print / Save PDF Certificate
                   </button>
                   <button
                     type="button"
@@ -584,21 +585,21 @@ export default function SettlementPage() {
         flexWrap: 'wrap',
         gap: 12,
         padding: '10px 16px',
-        background: 'rgba(217, 119, 6, 0.08)',
-        border: '1px solid rgba(217, 119, 6, 0.25)',
+        background: 'rgba(201, 168, 76, 0.06)',
+        border: '1px solid rgba(201, 168, 76, 0.2)',
         borderRadius: 8,
         marginBottom: 20,
         fontSize: 12
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'inline-block', boxShadow: '0 0 8px #4ade80' }} />
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent-gold)', display: 'inline-block', boxShadow: '0 0 8px var(--accent-gold)' }} />
           <strong>Live Market Spot:</strong>
           <span>1 USD = {options.fiatSymbol || '₹'}{liveMarket.fxRate || options.fxRate || 94.54}</span>
           <span style={{ color: 'var(--text-muted)' }}>({liveMarket.rateSource || 'Live Interbank Feed'})</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: 'var(--text-muted)' }}>
-          <span>Amoy Block: <strong style={{ color: 'var(--accent-cyan)' }}>#{liveMarket.amoyBlock || 46719582}</strong></span>
-          <span>Gas: <strong style={{ color: '#86efac' }}>{liveMarket.gasPriceGwei || 32} Gwei</strong></span>
+          <span>Amoy Block: <strong style={{ color: 'var(--accent-gold)' }}>#{liveMarket.amoyBlock || 46719582}</strong></span>
+          <span>Gas: <strong style={{ color: 'var(--accent-gold)' }}>{liveMarket.gasPriceGwei || 32} Gwei</strong></span>
         </div>
       </div>
 
@@ -610,7 +611,7 @@ export default function SettlementPage() {
           onClick={() => setSettlementMode('fiat')}
           style={{ flex: 1, padding: '12px 16px' }}
         >
-          🏦 Optimized Fiat Rail (Netting + Onramper)
+          Optimized Fiat Rail (Netting + Onramper)
         </button>
         <button
           type="button"
@@ -618,14 +619,14 @@ export default function SettlementPage() {
           onClick={() => setSettlementMode('onchain')}
           style={{ flex: 1, padding: '12px 16px' }}
         >
-          ⚡ Direct USDC Release (Polygon Amoy)
+          Direct USDC Release (Polygon Amoy)
         </button>
       </div>
 
       {settlementMode === 'fiat' ? (
         <>
           {/* ── Interactive Netting Engine Batch Card ── */}
-          <div className="app-card" style={{ marginBottom: 20, borderColor: netting.matchedAmount > 0 ? 'rgba(217,119,6,0.4)' : 'var(--border)' }}>
+          <div className="app-card" style={{ marginBottom: 20, borderColor: netting.matchedAmount > 0 ? 'rgba(201, 168, 76, 0.35)' : 'var(--border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -639,8 +640,8 @@ export default function SettlementPage() {
                   }}>
                     NETTING ENGINE (120s BATCH)
                   </span>
-                  <span style={{ fontSize: 12, color: 'var(--accent-cyan)' }}>
-                    ⏱ Window closes in: <strong>{countdown}s</strong>
+                  <span style={{ fontSize: 12, color: 'var(--accent-gold)' }}>
+                    Batch window: <strong>{countdown}s</strong>
                   </span>
                 </div>
                 <p className="app-note" style={{ margin: '0 0 10px' }}>
@@ -652,13 +653,13 @@ export default function SettlementPage() {
                 <div style={{
                   padding: '6px 12px',
                   borderRadius: 6,
-                  background: 'rgba(134,239,172,0.15)',
-                  border: '1px solid rgba(134,239,172,0.3)',
-                  color: '#86efac',
+                  background: 'rgba(201, 168, 76, 0.12)',
+                  border: '1px solid rgba(201, 168, 76, 0.3)',
+                  color: 'var(--accent-gold)',
                   fontSize: 13,
                   fontWeight: 600
                 }}>
-                  ✓ Saves ${netting.savings.usdc} in FX spread & gas
+                  Saves ${netting.savings.usdc} in FX spread & gas
                 </div>
               ) : null}
             </div>
@@ -670,7 +671,7 @@ export default function SettlementPage() {
               </div>
               <div style={{ padding: '10px 12px', background: 'rgba(0,0,0,0.3)', borderRadius: 6 }}>
                 <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Peer Matched Offset</span>
-                <p style={{ margin: '3px 0 0', fontWeight: 600, fontSize: 15, color: '#86efac' }}>
+                <p style={{ margin: '3px 0 0', fontWeight: 600, fontSize: 15, color: 'var(--accent-gold)' }}>
                   {fmtMoney(netting.matchedAmount || 0)}
                 </p>
               </div>
@@ -715,8 +716,8 @@ export default function SettlementPage() {
                           fontWeight: 600,
                           padding: '2px 6px',
                           borderRadius: 4,
-                          background: p.status === 'MATCHED' ? 'rgba(34,197,94,0.2)' : p.status === 'OFFSET' ? 'rgba(56,189,248,0.2)' : 'rgba(217,119,6,0.2)',
-                          color: p.status === 'MATCHED' ? '#86efac' : p.status === 'OFFSET' ? '#38bdf8' : '#fbbf24'
+                          background: p.status === 'MATCHED' ? 'rgba(201, 168, 76, 0.2)' : 'rgba(255,255,255,0.08)',
+                          color: p.status === 'MATCHED' ? 'var(--accent-gold)' : 'var(--text-secondary)'
                         }}>
                           {p.status}
                         </span>
@@ -733,7 +734,7 @@ export default function SettlementPage() {
           </div>
 
           {/* ── Onramper Multi-Gateway Aggregator Section ── */}
-          <div className="app-card" style={{ marginBottom: 20, borderColor: 'rgba(56, 189, 248, 0.3)' }}>
+          <div className="app-card" style={{ marginBottom: 20, borderColor: 'rgba(201, 168, 76, 0.25)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -742,12 +743,12 @@ export default function SettlementPage() {
                     borderRadius: 4,
                     fontSize: 11,
                     fontWeight: 700,
-                    background: 'linear-gradient(135deg, #0284c7, #38bdf8)',
-                    color: '#fff'
+                    background: 'var(--accent-gold)',
+                    color: '#000'
                   }}>
-                    ⚡ ONRAMPER AGGREGATOR
+                    ONRAMPER AGGREGATOR
                   </span>
-                  <span style={{ fontSize: 12, color: '#4ade80', fontWeight: 600 }}>
+                  <span style={{ fontSize: 12, color: 'var(--accent-gold)', fontWeight: 600 }}>
                     ● 4 Providers Live ({options.onramper?.source || 'Staging Sandbox'})
                   </span>
                 </div>
@@ -760,7 +761,9 @@ export default function SettlementPage() {
                 type="button"
                 className="app-btn app-btn--primary"
                 style={{
-                  background: 'linear-gradient(135deg, #0284c7, #38bdf8)',
+                  background: 'linear-gradient(135deg, #c9a84c, #996515)',
+                  color: '#000',
+                  fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
                   gap: 8,
@@ -769,7 +772,7 @@ export default function SettlementPage() {
                 }}
                 onClick={() => setShowOnramperModal(true)}
               >
-                ⚡ Test Live Off-Ramp Sandbox
+                Test Live Off-Ramp Sandbox
               </button>
             </div>
 
@@ -789,8 +792,8 @@ export default function SettlementPage() {
                     style={{
                       padding: '14px',
                       borderRadius: 10,
-                      background: isSelected ? 'rgba(56, 189, 248, 0.12)' : 'rgba(0, 0, 0, 0.25)',
-                      border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.08)',
+                      background: isSelected ? 'rgba(201, 168, 76, 0.1)' : 'rgba(0, 0, 0, 0.3)',
+                      border: isSelected ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.08)',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
@@ -800,17 +803,17 @@ export default function SettlementPage() {
                   >
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                        <strong style={{ fontSize: 14, color: isSelected ? '#38bdf8' : '#f8fafc' }}>
+                        <strong style={{ fontSize: 14, color: isSelected ? 'var(--accent-gold)' : '#f8fafc' }}>
                           {q.rampName}
                         </strong>
-                        <span style={{ fontSize: 11, color: '#fbbf24' }}>
+                        <span style={{ fontSize: 11, color: 'var(--accent-gold)' }}>
                           ★ {q.rating}
                         </span>
                       </div>
                       <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 8 }}>
                         {q.paymentMethodName}
                       </div>
-                      <div style={{ fontSize: 18, fontWeight: 700, color: '#86efac', marginBottom: 4 }}>
+                      <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--accent-gold)', marginBottom: 4 }}>
                         {options.fiatSymbol || '₹'}{q.fiatAmount.toLocaleString()}
                       </div>
                     </div>
@@ -839,7 +842,7 @@ export default function SettlementPage() {
                 href={options.onramper?.widgetUrl || 'https://buy.onramper.com/'}
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: 'var(--accent-cyan)', textDecoration: 'underline' }}
+                style={{ color: 'var(--accent-gold)', textDecoration: 'underline' }}
               >
                 Open Hosted Onramper Widget ↗
               </a>
@@ -927,14 +930,14 @@ export default function SettlementPage() {
             </div>
             <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.25)', borderRadius: 8 }}>
               <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Net USDC Payout</span>
-              <p style={{ margin: '4px 0 0', fontWeight: 700, fontSize: 18, color: '#86efac' }}>
+              <p style={{ margin: '4px 0 0', fontWeight: 700, fontSize: 18, color: 'var(--accent-gold)' }}>
                 {fmtMoney(options.releasedAmount)}
               </p>
             </div>
           </div>
 
-          <div style={{ padding: '12px 14px', background: 'rgba(56,189,248,0.08)', borderRadius: 8, border: '1px solid rgba(56,189,248,0.2)', marginBottom: 20 }}>
-            <strong style={{ color: 'var(--accent-cyan)', fontSize: 13 }}>Non-Custodial Guarantee:</strong>
+          <div style={{ padding: '12px 14px', background: 'rgba(201, 168, 76, 0.06)', borderRadius: 8, border: '1px solid rgba(201, 168, 76, 0.2)', marginBottom: 20 }}>
+            <strong style={{ color: 'var(--accent-gold)', fontSize: 13 }}>Non-Custodial Guarantee:</strong>
             <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--text-secondary)' }}>
               Execution interacts directly with ChainLancerEscrow smart contract. ChainLancer never holds custody of private keys or funds.
             </p>

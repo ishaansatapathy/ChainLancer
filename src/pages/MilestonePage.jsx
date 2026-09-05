@@ -93,9 +93,9 @@ export default function MilestonePage() {
                 borderRadius: 6,
                 fontSize: 12,
                 fontWeight: 700,
-                background: val.reviewStatus === 'PASS' ? 'rgba(134,239,172,0.15)' : 'rgba(217,119,6,0.15)',
-                color: val.reviewStatus === 'PASS' ? '#86efac' : 'var(--accent-gold)',
-                border: `1px solid ${val.reviewStatus === 'PASS' ? 'rgba(134,239,172,0.3)' : 'rgba(217,119,6,0.3)'}`
+                background: 'rgba(201,168,76,0.12)',
+                color: 'var(--accent-gold)',
+                border: '1px solid rgba(201,168,76,0.25)'
               }}>
                 Qship AI: {val.reviewStatus} ({Math.round((val.confidence || 0.94) * 100)}%)
               </span>
@@ -106,12 +106,12 @@ export default function MilestonePage() {
           <p style={{ margin: '0 0 6px' }}><strong>Verification Reference:</strong> <code>{d.evidenceHash}</code></p>
           {d.githubUrl ? (
             <p style={{ margin: '0 0 6px' }}>
-              <strong>GitHub PR:</strong> <a href={d.githubUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)' }}>{d.githubUrl}</a>
+              <strong>GitHub PR:</strong> <a href={d.githubUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-gold)' }}>{d.githubUrl}</a>
             </p>
           ) : null}
           {d.figmaUrl ? (
             <p style={{ margin: '0 0 6px' }}>
-              <strong>Figma:</strong> <a href={d.figmaUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)' }}>{d.figmaUrl}</a>
+              <strong>Figma:</strong> <a href={d.figmaUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-gold)' }}>{d.figmaUrl}</a>
             </p>
           ) : null}
           {d.fileRef ? (
@@ -125,7 +125,7 @@ export default function MilestonePage() {
 
           {val?.summary ? (
             <div style={{ marginTop: 14, padding: '10px 12px', background: 'rgba(0,0,0,0.25)', borderRadius: 6, border: '1px solid rgba(255,255,255,0.06)' }}>
-              <strong style={{ fontSize: 12, color: 'var(--accent-cyan)' }}>Qship Staff Review Summary:</strong>
+              <strong style={{ fontSize: 12, color: 'var(--accent-gold)' }}>Qship Staff Review Summary:</strong>
               <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--text-primary)' }}>{val.summary}</p>
             </div>
           ) : null}

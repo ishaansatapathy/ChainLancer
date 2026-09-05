@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth.js';
 
 function StatusLabel({ status }) {
   const ok = ['VERIFIED', 'CLEAR', 'APPROVED'].includes(status);
-  return <span style={{ color: ok ? '#86efac' : '#737373' }}>{status.replace(/_/g, ' ')}</span>;
+  return <span style={{ color: ok ? 'var(--accent-gold)' : '#737373', fontWeight: ok ? 600 : 400 }}>{status.replace(/_/g, ' ')}</span>;
 }
 
 export default function CompliancePage() {
@@ -24,7 +24,7 @@ export default function CompliancePage() {
         </div>
         <div className="app-card">
           <div className="app-card__title">Wallet</div>
-          <p>{user.walletVerified ? <span style={{ color: '#86efac' }}>VERIFIED</span> : <span style={{ color: '#737373' }}>NOT VERIFIED</span>}</p>
+          <p>{user.walletVerified ? <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>VERIFIED</span> : <span style={{ color: '#737373' }}>NOT VERIFIED</span>}</p>
           {!user.walletVerified ? (
             <Link to="/wallet" className="app-btn app-btn--ghost" style={{ marginTop: 12 }}>Connect Wallet</Link>
           ) : null}

@@ -59,9 +59,9 @@ export default function MilestoneReviewPage() {
   }
 
   const isPass = val?.reviewStatus === 'PASS' || val?.pass;
-  const badgeColor = isPass ? '#86efac' : (val?.reviewStatus === 'FAIL' ? '#f87171' : 'var(--accent-gold)');
-  const badgeBg = isPass ? 'rgba(134,239,172,0.1)' : (val?.reviewStatus === 'FAIL' ? 'rgba(248,113,113,0.1)' : 'rgba(217,119,6,0.1)');
-  const badgeBorder = isPass ? 'rgba(134,239,172,0.3)' : (val?.reviewStatus === 'FAIL' ? 'rgba(248,113,113,0.3)' : 'rgba(217,119,6,0.3)');
+  const badgeColor = isPass ? 'var(--accent-gold)' : (val?.reviewStatus === 'FAIL' ? '#f43f5e' : 'var(--accent-gold)');
+  const badgeBg = isPass ? 'rgba(201,168,76,0.08)' : (val?.reviewStatus === 'FAIL' ? 'rgba(244,63,94,0.08)' : 'rgba(201,168,76,0.08)');
+  const badgeBorder = isPass ? 'rgba(201,168,76,0.25)' : (val?.reviewStatus === 'FAIL' ? 'rgba(244,63,94,0.25)' : 'rgba(201,168,76,0.25)');
 
   // Authentic diff snippet for contracts/ChainLancerEscrow.sol
   const sampleDiffLines = [
@@ -143,7 +143,7 @@ export default function MilestoneReviewPage() {
               onClick={triggerRevalidation}
               disabled={validating}
             >
-              {validating ? 'Inspecting...' : '⚡ Re-run Qship AI'}
+              {validating ? 'Inspecting...' : 'Re-run Qship AI'}
             </button>
           </div>
 
@@ -156,7 +156,7 @@ export default function MilestoneReviewPage() {
                 </span>
                 <button
                   type="button"
-                  style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', fontSize: 12, cursor: 'pointer' }}
+                  style={{ background: 'none', border: 'none', color: 'var(--accent-gold)', fontSize: 12, cursor: 'pointer' }}
                   onClick={() => setShowAllDimensions(!showAllDimensions)}
                 >
                   {showAllDimensions ? 'Collapse' : 'Expand all 9 dimensions'}
@@ -176,8 +176,8 @@ export default function MilestoneReviewPage() {
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                       <strong style={{ color: 'var(--text-primary)' }}>{c.dimension}</strong>
-                      <span style={{ color: c.pass ? '#86efac' : '#f87171', fontWeight: 600 }}>
-                        {c.pass ? '✓ PASS' : '⚠ CHECK'}
+                      <span style={{ color: c.pass ? 'var(--accent-gold)' : '#f43f5e', fontWeight: 600 }}>
+                        {c.pass ? 'PASS' : 'FLAGGED'}
                       </span>
                     </div>
                     <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: 11 }}>{c.note}</p>
@@ -189,8 +189,8 @@ export default function MilestoneReviewPage() {
 
           {/* ── Issues (if any) ── */}
           {val.issues && val.issues.length > 0 ? (
-            <div style={{ marginTop: 14, padding: 10, borderRadius: 6, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
-              <strong style={{ color: '#fca5a5', fontSize: 12 }}>Items requiring attention ({val.issues.length}):</strong>
+            <div style={{ marginTop: 14, padding: 10, borderRadius: 6, background: 'rgba(244,63,94,0.08)', border: '1px solid rgba(244,63,94,0.2)' }}>
+              <strong style={{ color: '#f43f5e', fontSize: 12 }}>Items requiring attention ({val.issues.length}):</strong>
               <ul style={{ margin: '6px 0 0', paddingLeft: 18, fontSize: 12, color: 'var(--text-secondary)' }}>
                 {val.issues.map((iss, i) => (
                   <li key={i}>
@@ -214,31 +214,33 @@ export default function MilestoneReviewPage() {
               onClick={triggerRevalidation}
               disabled={validating}
             >
-              {validating ? 'Inspecting...' : '⚡ Run Qship AI Inspection'}
+              {validating ? 'Inspecting...' : 'Run Qship AI Inspection'}
             </button>
           </div>
         </div>
       )}
 
       {/* ── Real Git Commit & Repository Card ── */}
-      <div className="app-card" style={{ marginBottom: 16, borderColor: 'rgba(56, 189, 248, 0.25)' }}>
+      <div className="app-card" style={{ marginBottom: 16, borderColor: 'rgba(201, 168, 76, 0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 14 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontSize: 20 }}>🐙</span>
+            <div style={{ width: 28, height: 28, borderRadius: 6, background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-gold)', fontSize: 11, fontWeight: 700 }}>
+              GIT
+            </div>
             <div>
               <strong style={{ fontSize: 15, color: 'var(--text-primary)' }}>
                 GitHub PR & Local Git Audit: ishaansatapathy/ChainLancer
               </strong>
               <p style={{ margin: 0, fontSize: 12, color: 'var(--text-muted)' }}>
-                Branch: <code>main</code> · Head SHA: <code style={{ color: 'var(--accent-cyan)' }}>288383a753b</code>
+                Branch: <code>main</code> · Head SHA: <code style={{ color: 'var(--accent-gold)' }}>288383a753b</code>
               </p>
             </div>
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
-            <span style={{ fontSize: 12, background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', padding: '3px 8px', borderRadius: 4, fontWeight: 600 }}>
+            <span style={{ fontSize: 12, background: 'rgba(201, 168, 76, 0.12)', color: 'var(--accent-gold)', padding: '3px 8px', borderRadius: 4, fontWeight: 600 }}>
               +3,644 additions
             </span>
-            <span style={{ fontSize: 12, background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', padding: '3px 8px', borderRadius: 4, fontWeight: 600 }}>
+            <span style={{ fontSize: 12, background: 'rgba(244, 63, 94, 0.12)', color: '#f43f5e', padding: '3px 8px', borderRadius: 4, fontWeight: 600 }}>
               -307 deletions
             </span>
           </div>
@@ -259,7 +261,7 @@ export default function MilestoneReviewPage() {
           </div>
           <div>
             <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Primary Modified File:</span>
-            <p style={{ margin: '2px 0 0', fontSize: 12, fontFamily: 'monospace', color: 'var(--accent-cyan)' }}>
+            <p style={{ margin: '2px 0 0', fontSize: 12, fontFamily: 'monospace', color: 'var(--accent-gold)' }}>
               contracts/ChainLancerEscrow.sol
             </p>
           </div>
@@ -273,7 +275,7 @@ export default function MilestoneReviewPage() {
             </span>
             <button
               type="button"
-              style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}
+              style={{ background: 'none', border: 'none', color: 'var(--accent-gold)', fontSize: 12, cursor: 'pointer', textDecoration: 'underline' }}
               onClick={() => setShowDiffViewer(!showDiffViewer)}
             >
               {showDiffViewer ? 'Hide diff' : 'Inspect live code diff'}
@@ -282,7 +284,7 @@ export default function MilestoneReviewPage() {
 
           {showDiffViewer ? (
             <div style={{
-              background: '#0a0d14',
+              background: '#0c0c0c',
               border: '1px solid rgba(255,255,255,0.08)',
               borderRadius: 8,
               padding: '12px 16px',
@@ -292,7 +294,7 @@ export default function MilestoneReviewPage() {
               overflowY: 'auto'
             }}>
               {sampleDiffLines.map((l) => (
-                <div key={l.line} style={{ display: 'flex', gap: 12, lineHeight: '20px', color: l.type === 'add' ? '#86efac' : '#e2e8f0', background: l.type === 'add' ? 'rgba(34, 197, 94, 0.05)' : 'transparent' }}>
+                <div key={l.line} style={{ display: 'flex', gap: 12, lineHeight: '20px', color: l.type === 'add' ? 'var(--accent-gold)' : '#e2e8f0', background: l.type === 'add' ? 'rgba(201, 168, 76, 0.06)' : 'transparent' }}>
                   <span style={{ color: 'rgba(255,255,255,0.2)', width: 24, textAlign: 'right', userSelect: 'none' }}>{l.line}</span>
                   <span style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{l.content}</span>
                 </div>
@@ -316,11 +318,11 @@ export default function MilestoneReviewPage() {
           <p style={{ margin: '0 0 6px' }}><strong>Verification Ref:</strong> <code>{d.evidenceHash || '288383a'}</code></p>
           {d.githubUrl ? (
             <p style={{ margin: '0 0 6px' }}>
-              <strong>GitHub PR:</strong> <a href={d.githubUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)' }}>{d.githubUrl}</a>
+              <strong>GitHub PR:</strong> <a href={d.githubUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent-gold)' }}>{d.githubUrl}</a>
             </p>
           ) : (
             <p style={{ margin: '0 0 6px' }}>
-              <strong>GitHub PR:</strong> <a href="https://github.com/ishaansatapathy/ChainLancer" target="_blank" rel="noreferrer" style={{ color: 'var(--accent-cyan)' }}>https://github.com/ishaansatapathy/ChainLancer</a>
+              <strong>GitHub PR:</strong> <a href="https://github.com/ishaansatapathy/ChainLancer" target="_blank" rel="noreferrer" style={{ color: 'var(--accent-gold)' }}>https://github.com/ishaansatapathy/ChainLancer</a>
             </p>
           )}
           {d.description ? (
@@ -360,10 +362,10 @@ export default function MilestoneReviewPage() {
       ) : null}
 
       {ms.status === 'APPROVED' ? (
-        <div className="app-card" style={{ marginTop: 16, borderColor: 'rgba(134,239,172,0.3)', background: 'rgba(134,239,172,0.05)' }}>
+        <div className="app-card" style={{ marginTop: 16, borderColor: 'rgba(201,168,76,0.3)', background: 'rgba(201,168,76,0.06)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-            <span style={{ fontSize: 22, color: '#86efac' }}>✓</span>
-            <strong style={{ color: '#86efac', fontSize: 16 }}>Milestone Approved & Release Authorized</strong>
+            <span style={{ fontSize: 22, color: 'var(--accent-gold)' }}>✓</span>
+            <strong style={{ color: 'var(--accent-gold)', fontSize: 16 }}>Milestone Approved & Release Authorized</strong>
           </div>
           <p className="app-note" style={{ margin: '0 0 16px' }}>
             Deliverables verified across 9 engineering dimensions. Proceed to Settlement to execute Polygon Amoy USDC transfer or fiat off-ramp.

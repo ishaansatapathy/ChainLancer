@@ -37,13 +37,13 @@ function renderOptimizer(data) {
     <div id="settle-error" class="app-error" hidden></div>
 
     <!-- Live Market Ticker -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.25);border-radius:8px;margin-bottom:16px;font-size:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:8px;margin-bottom:16px;font-size:12px">
       <div>
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:6px"></span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-gold);margin-right:6px"></span>
         <strong>Live Interbank Spot:</strong> 1 USD = ${data.fiatSymbol || '₹'}${data.liveMarket?.fxRate || 94.54}
       </div>
       <div style="color:var(--text-muted)">
-        Polygon Amoy Block: <strong style="color:var(--accent-cyan)">#${data.liveMarket?.amoyBlock || 46721206}</strong> · Gas: <strong style="color:#86efac">${data.liveMarket?.gasPriceGwei || 30} Gwei</strong>
+        Polygon Amoy Block: <strong style="color:var(--accent-gold)">#${data.liveMarket?.amoyBlock || 46721206}</strong> · Gas: <strong style="color:var(--accent-gold)">${data.liveMarket?.gasPriceGwei || 30} Gwei</strong>
       </div>
     </div>
 
@@ -59,7 +59,7 @@ function renderOptimizer(data) {
         </div>
         <div>
           <span style="font-size:11px;color:var(--text-muted);text-transform:uppercase">Preferred Payout Asset</span>
-          <p style="margin:2px 0 0;font-size:18px;font-weight:700;color:#86efac">${data.preferredFiat || 'INR'}</p>
+          <p style="margin:2px 0 0;font-size:18px;font-weight:700;color:var(--accent-gold)">${data.preferredFiat || 'INR'}</p>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ function renderOptimizer(data) {
       ${data.netting.matchedAmount > 0 ? `
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
           <span style="padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:var(--accent-gold);color:#0a0a0f">NETTING MATCH FOUND</span>
-          <span style="color:#86efac;font-size:12px;font-weight:600">✓ Saves $${data.netting.savings?.usdc || 12.96} in spread & gas</span>
+          <span style="color:var(--accent-gold);font-size:12px;font-weight:600">✓ Saves $${data.netting.savings?.usdc || 12.96} in spread & gas</span>
         </div>
         <p style="margin:0 0 4px">Matched Offset: <strong>${fmtMoney(data.netting.matchedAmount)}</strong> · Residual Disbursal: <strong>${fmtMoney(data.netting.residualAmount)}</strong></p>
         <p class="app-note">${data.netting.savings?.description || 'Bilateral corridor pool matching reduces bank cross-border spread.'}</p>
@@ -84,13 +84,13 @@ function renderOptimizer(data) {
 
     <!-- Onramper Multi-Gateway Aggregator -->
     ${onramperQuotes.length > 0 ? `
-      <div class="app-card" style="margin-bottom:16px;border-color:rgba(56,189,248,0.3)">
+      <div class="app-card" style="margin-bottom:16px;border-color:rgba(201,168,76,0.25)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
           <div style="display:flex;align-items:center;gap:8px">
-            <span style="padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:linear-gradient(135deg,#0284c7,#38bdf8);color:#fff">⚡ ONRAMPER AGGREGATOR</span>
-            <span style="color:#4ade80;font-size:12px;font-weight:600">● 4 Live Providers</span>
+            <span style="padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:linear-gradient(135deg,#c9a84c,#996515);color:#000">ONRAMPER AGGREGATOR</span>
+            <span style="color:var(--accent-gold);font-size:12px;font-weight:600">● 4 Live Providers</span>
           </div>
-          <a href="${data.onramper?.widgetUrl || 'https://buy.onramper.com/'}" target="_blank" style="font-size:12px;color:var(--accent-cyan);text-decoration:underline">
+          <a href="${data.onramper?.widgetUrl || 'https://buy.onramper.com/'}" target="_blank" style="font-size:12px;color:var(--accent-gold);text-decoration:underline">
             Open Onramper Hosted Widget ↗
           </a>
         </div>
@@ -99,10 +99,10 @@ function renderOptimizer(data) {
             <div style="padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:8px">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
                 <strong style="font-size:13px">${q.rampName}</strong>
-                <span style="font-size:11px;color:#fbbf24">★ ${q.rating}</span>
+                <span style="font-size:11px;color:var(--accent-gold)">★ ${q.rating}</span>
               </div>
               <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">${q.paymentMethodName}</div>
-              <div style="font-size:16px;font-weight:700;color:#86efac">${data.fiatSymbol || '₹'}${q.fiatAmount.toLocaleString()}</div>
+              <div style="font-size:16px;font-weight:700;color:var(--accent-gold)">${data.fiatSymbol || '₹'}${q.fiatAmount.toLocaleString()}</div>
               <div style="font-size:10px;color:var(--text-muted);margin-top:4px">Fee: $${q.totalFee} · ETA: ~${q.settlementMinutes}m</div>
             </div>
           `).join('')}
@@ -194,11 +194,11 @@ function renderComplete(result) {
       <h1>Settlement Executed Successfully</h1>
       <p>Funds disbursed via ${s.provider} to recipient's destination rail.</p>
     </div>
-    <div class="app-card" style="border-color:rgba(134,239,172,0.3)">
+    <div class="app-card" style="border-color:rgba(201,168,76,0.3)">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-        <span style="font-size:24px;color:#86efac">✓</span>
+        <span style="font-size:24px;color:var(--accent-gold)">✓</span>
         <div>
-          <strong style="font-size:16px;color:#86efac">Payout Dispatched</strong>
+          <strong style="font-size:16px;color:var(--accent-gold)">Payout Dispatched</strong>
           <p class="app-note" style="margin:0">Reference: <code>${s.reference}</code></p>
         </div>
       </div>

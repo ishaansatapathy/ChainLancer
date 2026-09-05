@@ -74,7 +74,7 @@ export default function AppLayout({ activeId }) {
               color: 'var(--text-secondary)'
             }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-gold)', boxShadow: '0 0 6px rgba(201,168,76,0.6)', display: 'inline-block' }} />
                 <span>Amoy #{telemetry.network?.blockNumber ? telemetry.network.blockNumber.toLocaleString() : '80002'}</span>
               </span>
               <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
